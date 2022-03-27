@@ -1,10 +1,10 @@
 package compareDNA;
+import java.io.*; //imported to read inputs and provide outputs
 
 public class runCompareDNA {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		File dnaSequences = new File("src\testFiles\test.txt");
 	}
 
 }
