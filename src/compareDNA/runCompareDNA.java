@@ -3,6 +3,7 @@ import java.io.*; //read file inputs and generate outputs
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 public class runCompareDNA {
@@ -11,15 +12,25 @@ public class runCompareDNA {
 		
 //		File dnaSequences = new File("src\\testFiles\\sameRandomDNASequences.txt");
 		
-//		Set<String> dnaSequences = new HashSet<>(Files.readAllLines(Paths.get("src/testFiles/sameRandomDNASequences.txt")));
-		File currentDir = new File(".");
-		File parentDir = currentDir.getParentFile();
-		File dnaSequences = new File(parentDir,"testFiles/sameRandomDNASequences.txt");
-		 
-		if(dnaSequences.canRead())
-		{
-		    System.out.println(dnaSequences);
+//	    Scanner scn = new Scanner(new File(args[0]));
+	    
+//	    System.out.println(1);
+		Scanner input = new Scanner(new File(args[0]));
+		while (input.hasNextLine()) {
+			System.out.println(input.nextLine());
 		}
+
+
+		
+//		Set<String> dnaSequences = new HashSet<>(Files.readAllLines(Paths.get("src/testFiles/sameRandomDNASequences.txt")));
+//		File currentDir = new File(".");
+//		File parentDir = currentDir.getParentFile();
+//		File dnaSequences = new File(parentDir,"testFiles/sameRandomDNASequences.txt");
+		 
+//		if(dnaSequences.canRead())
+//		{
+//		    System.out.println(dnaSequences);
+//		}
 //		Set<String> dictionary = new HashSet<>(Files.readAllLines(Paths.get(dnaSequences)));
 		
 //		BufferedReader br = new BufferedReader(new FileReader(dnaSequences));
