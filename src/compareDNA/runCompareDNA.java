@@ -7,6 +7,9 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+//import classes to run pairwise analysis
+import compareDNA.validateTranscriptionOutputs;
+
 public class runCompareDNA {
 
 	public static void main(String[] args) throws IOException { //IOException added
@@ -21,9 +24,20 @@ public class runCompareDNA {
 			dnaSequencesArray.add(dnaSequence); //store each next dna sequence in the array
 		}
 		
+//		for (String dnaSequence : dnaSequencesArray) { //make sure that dna sequences have been stored in the array
+//			System.out.println(dnaSequence);
+//		}
+		
+		
+		validateTranscriptionOutputs transcriptionValidator;
+		
+		transcriptionValidator = new validateTranscriptionOutputs();
+		
 		for (String dnaSequence : dnaSequencesArray) { //make sure that dna sequences have been stored in the array
-			System.out.println(dnaSequence);
+			int isDNAValid = transcriptionValidator.validator(dnaSequence);
+			System.out.println(isDNAValid);
 		}
+		
 		
 		
 
