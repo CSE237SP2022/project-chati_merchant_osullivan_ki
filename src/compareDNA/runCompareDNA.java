@@ -47,9 +47,8 @@ public class runCompareDNA {
 			System.out.println(isDNAValid);
 		}
 		
-		Set<String> aminoAcidsDictionary = new HashSet<>(Files.readAllLines(Paths.get("compareDNA/aminoAcidsDictionary.txt")));
+		Set<String> aminoAcidsDictionary = new HashSet<>(Files.readAllLines(Paths.get("compareDNA/aminoAcidsDictionary.txt"))); //CHANGE this to run from src
 		
-//		HashMap<String, String> codonAminoAcidMap = new HashMap<>();
 		List<Map.Entry<String, String>> codonAminoAcidMap = new ArrayList<>();
 
 		
@@ -69,7 +68,6 @@ public class runCompareDNA {
 		
 		
 //		List<String> codonList = new ArrayList<String>();
-//	    String newTestLine = dnaSequencesArray[0];
 
 //	    	    System.out.println(codonList);
 	    
