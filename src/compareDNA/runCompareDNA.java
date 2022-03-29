@@ -9,6 +9,7 @@ import java.util.Set;
 
 //import classes to run pairwise analysis
 import compareDNA.validateTranscriptionOutputs;
+import compareDNA.translation;
 
 public class runCompareDNA {
 
@@ -37,6 +38,21 @@ public class runCompareDNA {
 			int isDNAValid = transcriptionValidator.validator(dnaSequence);
 			System.out.println(isDNAValid);
 		}
+		
+		translation conductTranslation;
+		
+		conductTranslation = new translation();
+		
+//		for (String dnaSequence : dnaSequencesArray) { 
+//			String[] mRNASequenceArray = conductTranslation.translater(dnaSequence); //translate dna to mrna
+//			for (String mRNASequence : mRNASequenceArray) {
+//				System.out.println(mRNASequence);
+//			}
+			//			String mRNASequence = mRNASequenceArray.toString(); //convert dna sequence array to a string
+//			System.out.println(mRNASequence);
+		}
+
+
 		
 		
 		
