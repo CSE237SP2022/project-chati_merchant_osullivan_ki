@@ -24,7 +24,6 @@ public class runCompareDNA {
 	public static void main(String[] args) throws IOException { //IOException added
 		
 		ArrayList<String> dnaSequencesArray = new ArrayList<String>(); //create array list for the dna sequences
-
 		
 		Scanner dnaSequenceInputFile = new Scanner(new File(args[0])); //read the sequences through the command line
 		
