@@ -33,21 +33,12 @@ public class runCompareDNA {
 
 	public static void main(String[] args) throws IOException { //IOException added
 		
-//		ArrayList<String> dnaSequencesArray = new ArrayList<String>(); //create array list for the dna sequences
-//		
-//		Scanner dnaSequenceInputFile = new Scanner(new File(args[0])); //read the sequences through the command line
-//		
-//		while (dnaSequenceInputFile.hasNextLine()) {
-//			String dnaSequence = dnaSequenceInputFile.nextLine(); //store each next dna sequence in the array
-//			dnaSequencesArray.add(dnaSequence); //store each next dna sequence in the array
-//		}
+		//setup
 		
 		ArrayList<String> dnaSequencesArray = readDNAInputToArray(args[0]);
 		
-//		for (String dnaSequence : dnaSequencesArray) { //make sure that dna sequences have been stored in the array
-//			System.out.println(dnaSequence);
-//		}
 		
+		//transcription
 		
 		validateTranscriptionOutputs transcriptionValidator;
 		
@@ -58,38 +49,52 @@ public class runCompareDNA {
 			System.out.println(isDNAValid);
 		}
 		
-		Set<String> aminoAcidsDictionary = new HashSet<>(Files.readAllLines(Paths.get("compareDNA/aminoAcidsDictionary.txt"))); //CHANGE this to run from src
+		
+		//translation
 		
 		List<Map.Entry<String, String>> codonAminoAcidMap = new ArrayList<>();
-
 		
-				
-//		for (Map.Entry<Integer,Field> tupleDescriptor : tupleDescriptors) {
-//			tupleString.append(tupleDescriptor.getValue());
-//		}
+		Scanner aminoAcidsDictionary = new Scanner(new File("compareDNA/aminoAcidsDictionary.txt")); //CHANGE this to run from src
 		
-		for (String codonAminoAcidMapping : aminoAcidsDictionary) {
+		while (aminoAcidsDictionary.hasNextLine()) {
+			String codonAminoAcidMapping = aminoAcidsDictionary.nextLine(); //store each next dna sequence in the array
 			String[] codonToAminoAcidArray = codonAminoAcidMapping.split("\\s+");
 			String codon = codonToAminoAcidArray[0];
-			String aminoAcid = codonToAminoAcidArray[1];
+			String aminoAcid = codonToAminoAcidArray[2];
 			Map.Entry<String, String> codonToAminoAcidEntry = new AbstractMap.SimpleEntry<>(codon, aminoAcid);
 			codonAminoAcidMap.add(codonToAminoAcidEntry);
-//			System.out.println(codonToAminoAcidEntry);
 		}
-		
-		
-//		List<String> codonList = new ArrayList<String>();
 
-//	    	    System.out.println(codonList);
-	    
-	    for (String dnaSequence : dnaSequencesArray) { //make sure that dna sequences have been stored in the array
-	    	 for (int i = 0; i < dnaSequence.length(); i += 3) {
-	 	        String newTestLine = dnaSequence.substring(i);
-	 	        String codon = newTestLine.substring(0, 3);
-//	 	        codonList.add(codon);
-	 	       System.out.println(codon);
-	 	    }
-
+    	ArrayList<String> aminoAcidSequencesStringArray = new ArrayList<String>();
+    	
+	    for (String dnaSequence : dnaSequencesArray) { 
+	    	List<String> dnaCodonsArray = new ArrayList<String>();
+	    	for (int i = 0; i < dnaSequence.length(); i += 3) {
+	 	       String newTestLine = dnaSequence.substring(i);
+	 	       String codon = newTestLine.substring(0, 3);
+	 	      dnaCodonsArray.add(codon);
+	    	}
+	    	
+	    	ArrayList<String> aminoAcidSequencesCharArray = new ArrayList<String>();
+	    	
+	    	for (String codon : dnaCodonsArray) {
+	    		for (Map.Entry<String, String> codonEntry : codonAminoAcidMap) {
+		            if (codonEntry.getKey().equals(codon)) {
+		            	aminoAcidSequencesCharArray.add(codonEntry.getValue());
+		            }
+		        }	    		
+	    	}
+	    	
+	    	StringBuilder aminoAcidPeptideChainBuilder = new StringBuilder();
+	    	
+	    	for(String aminoAcid : aminoAcidSequencesCharArray) {
+	    		aminoAcidPeptideChainBuilder.append(aminoAcid);
+	    	}
+	    	
+	    	String aminoAcidPeptideChain = aminoAcidPeptideChainBuilder.toString();
+	    	aminoAcidSequencesStringArray.add(aminoAcidPeptideChain);
+	    	
+	    	System.out.println(aminoAcidPeptideChain);
 	    }
 
 				
