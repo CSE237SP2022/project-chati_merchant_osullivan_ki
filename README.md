@@ -7,6 +7,8 @@ the nucleotide bases from each DNA strand. We can compare deletions and insertio
 
 ## Stories Completed
 
+## Overview
+
 ### Command Line Initiation
 
 ### Read Sample DNA Sequences from Text File
