@@ -1,6 +1,8 @@
 # The DNA Compare-Inator
 
-This project takes a set of DNA strands - a sequence of nucleotide base pairs represented by A,T,C, and G - and first converts them to mRNA sequences via the process of transcription. Next, the mRNA sequences are converted to amino acids via the process of transcription. This involves splitting the mRNA sequences into subsets of 3 nucleotide base pairs (codons), which map to amino acid residues that form peptide chains. Finally, the two output peptide chains are compared based on the degree of overlapping amino acid residues.
+This project takes a set of DNA strands - a sequence of nucleotide base pairs represented by A,T,C, and G - and first converts them to mRNA sequences via the process of transcription. Next, the mRNA sequences are converted to amino acids via the process of transcription. This involves splitting the mRNA sequences into subsets of 3 nucleotide base pairs (codons), which map to amino acid residues that form peptide chains. Finally, the two output peptide chains are compared based on the degree of overlapping amino acid residues. 
+
+Directions to run the program are provided at the bottom along with a list of commands. 
 
 ##### Project Github Names
 ###### project-chati_merchant_osullivan_ki
@@ -72,6 +74,10 @@ This project takes a set of DNA strands - a sequence of nucleotide base pairs re
 - One such being cysteine residues forming a bridge if distributed far enough
 - Similarly, we can detail properties of the protein based on the amino acid resides: more polar residues may indicate a channel, more neutral residues with certain highly reactive residues may indicate an enzyme, etc. 
 
+### Expand Set of Test Files
+- We are hoping to expand on the set of test files we use, including real genomic segments from NCBI GEO
+- Using real genomic data may give us better grounds for testing the power and efficiency of our program
+
 ## Errors and Challenges
 
 ### File Not Found Error
@@ -99,10 +105,11 @@ This project takes a set of DNA strands - a sequence of nucleotide base pairs re
 - Open a command prompt with the appropriate Java, Git, and OS versions
 - Once you have cloned the repository, ensure you are on the main branch (default)
 - Navigate into the src directory with the command "cd src"
-- From the src directory, if the program has not compilied, first run "javac compareDNA.runCompareDNA.java"
+- From the src directory, if the program has not compilied, first run "javac compareDNA/runCompareDNA.java"
 - To then run the program once in src, call "java compareDNA.runCompareDNA testFiles/sameRandomDNASequences.txt"
 
-### Run Commands (Call in src Folder)
+### List of Commands (Call in src Folder)
+- Compile program prior to running: javac compareDNA/runCompareDNA.java
 - Compare same DNA sequences: java compareDNA.runCompareDNA testFiles/sameRandomDNASequences.txt
 - Compare drastically different DNA sequences: java compareDNA.runCompareDNA testFiles/differentRandomDNASequences.txt
 - Non-DNA sequences (throws DNA validation exception): java compareDNA.runCompareDNA testFiles/notDNASequences.txt
