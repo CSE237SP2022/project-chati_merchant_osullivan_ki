@@ -14,7 +14,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class translation {
-    public ArrayList<String> translater(String[] dnaSequencesArray) throws FileNotFoundException {
+    public ArrayList<String> translater(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
 
      //   ArrayList<String> dnaSequencesArray = dnaSequencesArray;
         

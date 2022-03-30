@@ -6,6 +6,11 @@ public class DNAstrand {
 	int percT = 0;
 	int percG = 0;
 	
+	double percentageA = 0;
+	double percentageT = 0;
+	double percentageC = 0;
+	double percentageG = 0;
+	
 	int lengthDNA = 0;
 	
 	String DNAsequence;
@@ -46,10 +51,10 @@ public class DNAstrand {
 				percG++;
 			}
 		}
-		percA = percA/lengthDNA;
-		percC = percC/lengthDNA;
-		percT = percT/lengthDNA;
-		percG = percG/lengthDNA;
+		percentageA = (double) percA/lengthDNA;
+		percentageT = (double) percT/lengthDNA;
+		percentageC = (double) percC/lengthDNA;
+		percentageG = (double) percG/lengthDNA;
 
 	}
 	
