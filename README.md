@@ -104,13 +104,13 @@ Directions to run the program are provided at the bottom along with a list of co
 ### Directions
 - Open a command prompt with the appropriate Java, Git, and OS versions
 - Once you have cloned the repository, ensure you are on the main branch (default)
-- Navigate into the src directory with the command "cd src"; your commpand line should look something like "...\project-chati_merchant_osullivan_ki\src>"
-- From the src directory, if the program has not compilied, first run "javac compareDNA/runCompareDNA.java"
-- To then run the program once in src, call "java compareDNA.runCompareDNA testFiles/sameRandomDNASequences.txt"
+- Navigate into the src directory with the command: __cd src__; your command line should look something like: __C:\...\project-chati_merchant_osullivan_ki\src>__
+- From the src directory, if the program has not compilied, first run: __javac compareDNA/runCompareDNA.java__
+- To then run the program once in src, call the program on a test file in the testFiles folder: __java compareDNA.runCompareDNA testFiles/{testFileName.txt}__
 
 ### List of Commands (Call in src Folder)
-- Compile program prior to running: javac compareDNA/runCompareDNA.java
-- Even before humans, there was technology; run the following to see the true meaning of life: java compareDNA.runCompareDNA testFiles/surpriseDNASequences.txt
-- Compare same DNA sequences: java compareDNA.runCompareDNA testFiles/sameRandomDNASequences.txt
-- Compare drastically different DNA sequences: java compareDNA.runCompareDNA testFiles/differentRandomDNASequences.txt
-- Non-DNA sequences (throws DNA validation exception): java compareDNA.runCompareDNA testFiles/notDNASequences.txt
+- Compile program prior to running: __javac compareDNA/runCompareDNA.java__
+- Run the following to see the true meaning of life: java __compareDNA.runCompareDNA testFiles/surpriseDNASequences.txt__
+- Compare same DNA sequences: __java compareDNA.runCompareDNA testFiles/sameRandomDNASequences.txt__
+- Compare drastically different DNA sequences: __java compareDNA.runCompareDNA testFiles/differentRandomDNASequences.txt__
+- Non-DNA sequences (throws DNA validation exception): __java compareDNA.runCompareDNA testFiles/notDNASequences.txt__
