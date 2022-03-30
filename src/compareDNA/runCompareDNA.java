@@ -20,17 +20,29 @@ import compareDNA.translation;
 //create mappings from input to output: https://www.baeldung.com/java-map-entry
 
 public class runCompareDNA {
-
-	public static void main(String[] args) throws IOException { //IOException added
-		
+	
+	public static ArrayList<String> readDNAInputToArray(String filePath) throws FileNotFoundException {
 		ArrayList<String> dnaSequencesArray = new ArrayList<String>(); //create array list for the dna sequences
-		
-		Scanner dnaSequenceInputFile = new Scanner(new File(args[0])); //read the sequences through the command line
-		
+		Scanner dnaSequenceInputFile = new Scanner(new File(filePath)); //read the sequences through the command line
 		while (dnaSequenceInputFile.hasNextLine()) {
 			String dnaSequence = dnaSequenceInputFile.nextLine(); //store each next dna sequence in the array
 			dnaSequencesArray.add(dnaSequence); //store each next dna sequence in the array
 		}
+		return dnaSequencesArray;
+	}
+
+	public static void main(String[] args) throws IOException { //IOException added
+		
+//		ArrayList<String> dnaSequencesArray = new ArrayList<String>(); //create array list for the dna sequences
+//		
+//		Scanner dnaSequenceInputFile = new Scanner(new File(args[0])); //read the sequences through the command line
+//		
+//		while (dnaSequenceInputFile.hasNextLine()) {
+//			String dnaSequence = dnaSequenceInputFile.nextLine(); //store each next dna sequence in the array
+//			dnaSequencesArray.add(dnaSequence); //store each next dna sequence in the array
+//		}
+		
+		ArrayList<String> dnaSequencesArray = readDNAInputToArray(args[0]);
 		
 //		for (String dnaSequence : dnaSequencesArray) { //make sure that dna sequences have been stored in the array
 //			System.out.println(dnaSequence);
@@ -96,10 +108,8 @@ public class runCompareDNA {
 //		}
 
 
-		
-		
-		
-
 	}
+	
+	
 
 }
