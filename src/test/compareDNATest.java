@@ -25,22 +25,7 @@ import compareDNA.DNAstrand;
 
 public class compareDNATest {
 	
-//	@Before
-//	public void setup() throws IOException { //added throws IOException for error handling
-//		
-//		try {
-//			Files.copy(new File("testFiles/test.dat.bak").toPath(), new File("testFiles/test.dat").toPath(), StandardCopyOption.REPLACE_EXISTING);
-//		} catch (IOException e) {
-//			System.out.println("unable to copy files");
-//			e.printStackTrace();
-//		}
-//		
-//	}
 
-//	@Test
-//	public void test() {
-//		assertEquals(1,1);
-//	} 
 	@Test
 	public void testReadDNASequences() throws FileNotFoundException {
 		
@@ -83,6 +68,7 @@ public class compareDNATest {
 		assertTrue("The incorrect DNA sequences are being evaluated as valid.", incorrectDNAValidationOutput == true);//true: there is an error in sequences
 	}
 
+	@Test
 	public void testComputeDNAStatistics() throws Exception {		
 
 		//create a set of dna sequences containing only adenine nucleotides
@@ -115,9 +101,9 @@ public class compareDNATest {
 		List<List<Double>> polyAStatisticsList = new ArrayList<>();
 		List<Double> polyAStatistics = new ArrayList<>();
 		polyAStatistics.add(1.0);
-		polyAStatistics.add(1.0);
-		polyAStatistics.add(1.0);
-		polyAStatistics.add(1.0);
+		polyAStatistics.add(0.0);
+		polyAStatistics.add(0.0);
+		polyAStatistics.add(0.0);
 		polyAStatisticsList.add(polyAStatistics);
 		polyAStatisticsList.add(polyAStatistics);
 		
@@ -153,6 +139,27 @@ public class compareDNATest {
 		assertTrue("The nucleotide compositions of the equal DNA Sequences are incorrect", allEqualStatisticsList.equals(dnaStatisticsListAllEqual));
 
 	}
+	
+	@Test
+	public void testConductTranscription() throws Exception {
+		
+		//create a set of lists containing all the nucleotides
+		ArrayList<String> sampleDNASequence = new ArrayList<>();
+		sampleDNASequence.add("AAAAAATTTTTT");
+		sampleDNASequence.add("CCCCCCGGGGGG");
+		
+		//create expected dna sequences
+		ArrayList<String> expectTranscriptionOutputs = new ArrayList<>();
+		expectTranscriptionOutputs.add("UUUUUUAAAAAA");
+		expectTranscriptionOutputs.add("GGGGGGCCCCCC");
+		
+		//conduct transcription 
+		ArrayList<String> transcriptionOutputs = runCompareDNA.conductTranscription(sampleDNASequence);
+		
+		assertTrue("Transcription was not conducted carefully. Please check the outputs.", expectTranscriptionOutputs.equals(transcriptionOutputs)); 
+
+		
+	} 
 
 
 }
