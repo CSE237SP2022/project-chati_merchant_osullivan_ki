@@ -52,16 +52,27 @@ This project takes a set of DNA strands - a sequence of nucleotide base pairs re
 ## Stories to Complete for Iteration 2
 
 ### Expand Scope of DNA Analysis 
+- During iteration 2, we are hoping to improve the realm of statistics computed on the DNA sequences
+- This includes comparing it to a database of sequences and identifying similar substrings, identifying any repeating patterns of nucleotides, and identifying segments of repeated nucleotides (possibly indicating regulatory elements)
 
 ### Parse DNA Sequences with Lengths Not Divisible by 3
+- The program should take in DNA sequences that are not of lengths divisible by 3
+- We are aiming to account for the overhang by either deleting it or implementing it in the insertion and deletion model for the amino acid pairwise comparison
 
 ### Start and Stop Translation at Appropriate Codons
+- Certain codons initiate and terminate the process of translation
+- We are aiming to parse through the DNA sequence and identify where the start and stop codons are and then only translate the segements in between
 
 ### Identify Sources of Insertions and Deletions Between DNA Sequences and Amino Acid Peptides
+- This would involve using better models to compute the probability of an insertion or deletion (hidden markov models may be the most useful in this area)
+- We would want to say that certain residues have either been added or deleted, and maybe tie that to downstream issues in folding
 
 ### Identify Simple Folding Patterns Based on Amino Acid Residues
+- Since protein folding is one of the most complex problems in computing, we are aiming to simplify our folding pattern indicator to certain residues that indicate bridges or hallmark structures
+- One such being cysteine residues forming a bridge if distributed far enough
+- Similarly, we can detail properties of the protein based on the amino acid resides: more polar residues may indicate a channel, more neutral residues with certain highly reactive residues may indicate an enzyme, etc. 
 
-## Errors
+## Errors and Challenges
 
 ### File Not Found Error
 - The first main error incurred involved the importation of text files corresponding to the amino acid dictionary and the DNA sequences
@@ -77,6 +88,10 @@ This project takes a set of DNA strands - a sequence of nucleotide base pairs re
 - Each codon needs to be specifically 3 nucleotide base pairs in order to be read, however, codons are read based on certain start and stop signals
 - Since we did not account for this, we included a temporary fix by making the test DNA sequences have lengths divisible by 3
 - A more robust correction would involve checking the overhang and ommitting if necessary
+
+### Insertion and Deletions in Peptide Chains
+- One challenge we are still working on is properly discovering insertions and deletions between two peptide chains
+- Since insertions and deletions can cause difference in lengths of the chains and may cause index changes, more robust statistical models need to be used
 
 ## Run Commands
 
