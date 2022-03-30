@@ -1,15 +1,17 @@
-# project-chati_merchant_osullivan_ki
-### project-chati_merchant_osullivan_ki created by GitHub Classroom
-This project takes a set of DNA strands - a sequence of nucleotide base pairs represented by A,T,C, and G - and identifies pairwise differences between 
-the nucleotide bases from each DNA strand. We can compare deletions and insertions within the two DNA strands to identify points of difference and overall similarities.
+# The DNA Compare-Inator
+
+This project takes a set of DNA strands - a sequence of nucleotide base pairs represented by A,T,C, and G - and first converts them to mRNA sequences via the process of transcription. Next, the mRNA sequences are converted to amino acids via the process of transcription. This involves splitting the mRNA sequences into subsets of 3 nucleotide base pairs (codons), which map to amino acid residues that form peptide chains. Finally, the two output peptide chains are compared based on the degree of overlapping amino acid residues.
+
+##### Project Github Names
+###### project-chati_merchant_osullivan_ki
+###### project-chati_merchant_osullivan_ki created by GitHub Classroom
 
 # Iteration 1 | 03/30/2022
 
 ## Stories Completed
 
-## Overview
-
 ### Command Line Initiation
+- The program can be initiated from the command line with the set of commands provided at the bottom of this document
 
 ### Read Sample DNA Sequences from Text File
 - The program is able to take in a text file that contains 2 DNA sequences; one for each line
@@ -88,3 +90,4 @@ the nucleotide bases from each DNA strand. We can compare deletions and insertio
 ### Run Commands (Call in src Folder)
 - Compare same DNA sequences: java compareDNA.runCompareDNA testFiles/sameRandomDNASequences.txt
 - Compare drastically different DNA sequences: java compareDNA.runCompareDNA testFiles/differentRandomDNASequences.txt
+- Non-DNA sequences (throws DNA validation exception): java compareDNA.runCompareDNA testFiles/notDNASequences.txt
