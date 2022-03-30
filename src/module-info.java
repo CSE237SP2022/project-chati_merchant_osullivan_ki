@@ -1,4 +1,5 @@
 module compareDNA {
 	requires junit;
-//	test 
+	exports test to junit;
+	//	test 
 }
