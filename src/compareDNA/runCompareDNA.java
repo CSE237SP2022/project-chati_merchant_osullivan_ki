@@ -178,16 +178,6 @@ public class runCompareDNA {
 		else {
 			throw new Exception("There is an error in the outputed mRNA Sequences. Please review the mRNA strands prior to conducting translation.");
 		}
-				
-		
-//		for (String dnaSequence : dnaSequencesArray) { 
-//			String[] mRNASequenceArray = conductTranslation.translater(dnaSequencesArray); //translate dna to mrna
-//			for (String mRNASequence : mRNASequenceArray) {
-//				System.out.println(mRNASequence);
-//			}
-//			String mRNASequence = mRNASequenceArray.toString(); //convert dna sequence array to a string
-//			System.out.println(mRNASequence);
-//		}
 
 
 	}

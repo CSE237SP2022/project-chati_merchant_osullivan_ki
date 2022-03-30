@@ -1,7 +1,6 @@
 package test;
 
 //import packages testing modules
-//import static org.junit.platform.engine.ConfigurationParameters;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.*;
@@ -14,7 +13,6 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Scanner;
-//import org.junit.jupiter.api.Test;
 
 
 

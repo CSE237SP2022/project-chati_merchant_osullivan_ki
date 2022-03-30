@@ -5,7 +5,6 @@ public class validateTranscriptionOutputs {
     public boolean validator(String x) {
         int success = 0;
         boolean isRNA = true;
-//        int notRNA = 2;
         String [] sentence = new String [x.length()];
         for(int i = 0; i < x.length(); i++){
             sentence[i] = String.valueOf(x.charAt(i));
@@ -18,9 +17,7 @@ public class validateTranscriptionOutputs {
         if (x.contains("U")) { //if there is a U, then it's not DNA. So return not dna or rna
             return isRNA;
         } 
-//        else { //if there is no U but has a T, then it is still DNA
-//            return isDNA;
-//        }
+
         System.out.println(sentence);
         return isRNA; //return a success if there is no t or u in the mRNA passed into this.
     }

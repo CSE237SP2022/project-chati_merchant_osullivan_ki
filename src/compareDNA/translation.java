@@ -15,8 +15,6 @@ import java.util.Set;
 
 public class translation {
     public ArrayList<String> translater(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
-
-     //   ArrayList<String> dnaSequencesArray = dnaSequencesArray;
         
         List<Map.Entry<String, String>> codonAminoAcidMap = new ArrayList<>();
         Scanner aminoAcidsDictionary = new Scanner(new File("compareDNA/aminoAcidsDictionary.txt")); // CHANGE this to
@@ -60,7 +58,6 @@ public class translation {
             String aminoAcidPeptideChain = aminoAcidPeptideChainBuilder.toString();
             aminoAcidSequencesStringArray.add(aminoAcidPeptideChain);
 
-            // System.out.println(aminoAcidPeptideChain);
         }
         return aminoAcidSequencesStringArray;
     }
