@@ -1,8 +1,10 @@
 # The DNA Compare-Inator
 
-This project takes a set of DNA strands - a sequence of nucleotide base pairs represented by A,T,C, and G - and first converts them to mRNA sequences via the process of transcription. Next, the mRNA sequences are converted to amino acids via the process of transcription. This involves splitting the mRNA sequences into subsets of 3 nucleotide base pairs (codons), which map to amino acid residues that form peptide chains. Finally, the two output peptide chains are compared based on the degree of overlapping amino acid residues. 
+The program takes a set of DNA strands - a sequence of nucleotide base pairs represented by A,T,C, and G - and first converts them to mRNA sequences via the process of transcription. Next, the mRNA sequences are converted to amino acids via the process of transcription. This involves splitting the mRNA sequences into subsets of 3 nucleotide base pairs (codons), which map to amino acid residues that form peptide chains. Finally, the two output peptide chains are compared based on the degree of overlapping amino acid residues. 
 
 Directions to run the program are provided at the bottom along with a list of commands. 
+
+And yes, this program was named after the world famous scientist and inventor [Dr. Heinz Doofenshmirtz](https://en.wikipedia.org/wiki/Dr._Heinz_Doofenshmirtz). His other ingenous -inators can be found [here](https://phineasandferb.fandom.com/wiki/List_of_Doofenshmirtz%27s_schemes_and_inventions)
 
 ##### Project Github Names
 ###### project-chati_merchant_osullivan_ki
