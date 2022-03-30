@@ -50,7 +50,7 @@ public class runCompareDNA {
 		}
 		
 		
-		//translation
+		//translation test
 		
 		List<Map.Entry<String, String>> codonAminoAcidMap = new ArrayList<>();
 		
