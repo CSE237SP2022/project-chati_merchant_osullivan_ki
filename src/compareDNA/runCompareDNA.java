@@ -31,35 +31,11 @@ public class runCompareDNA {
 		}
 		return dnaSequencesArray;
 	}
-
-	public static void main(String[] args) throws Exception { //IOException added
-		
-		System.out.println("\n");
-		
-		//setup
-		
-		ArrayList<String> dnaSequencesArray = readDNAInputToArray(args[0]);
-		
-		//output provided dna sequences
-		
-		int dnaStrandIndex = 1; 
-		
-		System.out.println("Provided DNA Sequences");
-		
-		for (String dnaSequence : dnaSequencesArray) {
-			System.out.printf("DNA Sequence %d: %s \n", dnaStrandIndex, dnaSequence);
-			dnaStrandIndex++;
-		}
-
-		System.out.println("\n");
-		
-		//dna input validation
-		
-		dnaStrandIndex = 1;
+	
+	public static boolean validateInputDNASequences(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
+		int dnaStrandIndex = 1;
 		boolean dnaStrandError = false;
-		
 		System.out.println("Evaluate Inputed DNA Sequences");
-		
 		for (String dnaSequence : dnaSequencesArray) {
 			DNAstrand dnaInputValidation;
 			dnaInputValidation = new DNAstrand(dnaSequence);
@@ -73,67 +49,65 @@ public class runCompareDNA {
 			}
 			dnaStrandIndex++;
 		}
-		
-		System.out.println("\n");
-		
-		//compute dna statistics
-		
+		return dnaStrandError;
+	}
+	
+	public static List<List<Double>> computeDNAStatistics(boolean dnaStrandError, ArrayList<String> dnaSequencesArray) throws Exception {
 		System.out.println("Compute DNA Sequence Length Nucleotide Composition");
+		List<List<Double>> nucleotideCompositionsList = new ArrayList<>();
 		
-		dnaStrandIndex = 1;
-		
+		int dnaStrandIndex = 1;
 		if (!dnaStrandError) {
 			for (String dnaSequence : dnaSequencesArray) {
-				
 				DNAstrand dnaStatistics;
-				dnaStatistics = new DNAstrand(dnaSequence);
-//				dnaStatistics.calculateDNAstats();
+				dnaStatistics = new DNAstrand(dnaSequence);				
+				List<Double> nucleotideCompositions = new ArrayList<>();
 				
 				System.out.printf("DNA Sequence %d Length: %d \n", dnaStrandIndex, dnaStatistics.lengthDNA);
-
 				double percentageA = dnaStatistics.percentageA;
 				double percentageT = dnaStatistics.percentageT;
 				double percentageC = dnaStatistics.percentageC;
 				double percentageG = dnaStatistics.percentageG;
-				
 				System.out.printf("DNA Sequence %d Nucleotide Composition: A: %f | T: %f | C: %f | G: %f  \n", dnaStrandIndex, percentageA, percentageT, percentageC, percentageG);
-				
 				dnaStrandIndex++;
-			}						
+
+				nucleotideCompositions.add(percentageA);
+				nucleotideCompositions.add(percentageT);
+				nucleotideCompositions.add(percentageC);
+				nucleotideCompositions.add(percentageG);
+				
+				nucleotideCompositionsList.add(nucleotideCompositions);
+			}
+			
 		}
 		else {
 			throw new Exception("There is an error in the provided DNA sequences. Please review the input files prior to conducting transcription.");
 		}
 		
-		System.out.println("\n");
-		
-		//transcription
-		
+		return nucleotideCompositionsList;
+	}
+	
+	
+	public static ArrayList<String> conductTranscription(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
 		ArrayList<String> mRNASequencesArray = new ArrayList<>();
-		
-		dnaStrandIndex = 1;
-		
+		int dnaStrandIndex = 1;
 		System.out.println("Conduct Transcription to mRNA");
-		
 		for (String dnaSequence : dnaSequencesArray) {
-			
 			DNAstrand transcriptionModule;
 			transcriptionModule = new DNAstrand(dnaSequence);
 			
 			String mRNASequence = transcriptionModule.DNAtomRNA();
 			mRNASequencesArray.add(mRNASequence);
-
+			
 			System.out.printf("DNA Sequence %d: %s \n", dnaStrandIndex, dnaSequence);
 			System.out.printf("RNA Sequence %d: %s \n", dnaStrandIndex, mRNASequence);
-			
 			dnaStrandIndex++;
 		}
-
-		System.out.println("\n");
-
-		//transcription output validation
-		
-		dnaStrandIndex = 1;
+		return mRNASequencesArray;
+	}
+	
+	public static boolean validateTranscriptionResults(ArrayList<String> mRNASequencesArray) throws FileNotFoundException {
+		int dnaStrandIndex = 1;
 		boolean transcriptionOutputError = false;
 		
 		System.out.println("Validate Transcription Outputs");
@@ -155,30 +129,62 @@ public class runCompareDNA {
 			dnaStrandIndex++;
 			
 		}
-		
-		System.out.println("\n");
-
-		//translation
-		
+		return transcriptionOutputError;
+	}
+	
+	public static ArrayList<String> conductTranslation(boolean transcriptionOutputError, ArrayList<String> mRNASequencesArray) throws Exception {
+		ArrayList<String> aminoAcidSequencesArray;
 		if (!transcriptionOutputError) {
-			dnaStrandIndex = 1;
-			
-			System.out.println("Conduct Translation from mRNA to Amino Acid Chain");
-			
+			int dnaStrandIndex = 1;			
+			System.out.println("Conduct Translation from mRNA to Amino Acid Chain");			
 			translation conductTranslation;
-			conductTranslation = new translation();
-			
-			ArrayList<String> aminoAcidSequencesArray = conductTranslation.translater(mRNASequencesArray);
-			
+			conductTranslation = new translation();		
+			aminoAcidSequencesArray = conductTranslation.translater(mRNASequencesArray);		
 			for (String peptideChain : aminoAcidSequencesArray) {
 				System.out.printf("Peptide Chain Sequence %d: %s \n", dnaStrandIndex, peptideChain);
 			}
 		}
-		
 		else {
 			throw new Exception("There is an error in the outputed mRNA Sequences. Please review the mRNA strands prior to conducting translation.");
 		}
+		return aminoAcidSequencesArray;
+	}
 
+	// run program and call methods above sequentially
+	public static void main(String[] args) throws Exception { //IOException added
+		
+		System.out.println("\n");
+		
+		//setup
+		ArrayList<String> dnaSequencesArray = readDNAInputToArray(args[0]);
+		
+		//output provided dna sequences
+		int dnaStrandIndex = 1; 
+		System.out.println("Provided DNA Sequences");
+		for (String dnaSequence : dnaSequencesArray) {
+			System.out.printf("DNA Sequence %d: %s \n", dnaStrandIndex, dnaSequence);
+			dnaStrandIndex++;
+		}
+		System.out.println("\n");
+		
+		//dna input validation
+		boolean dnaStrandError = validateInputDNASequences(dnaSequencesArray);
+		System.out.println("\n");
+		
+		//compute dna statistics
+		List<List<Double>> dnaStatisticsList = computeDNAStatistics(dnaStrandError, dnaSequencesArray);
+		System.out.println("\n");
+		
+		//transcription
+		ArrayList<String> mRNASequencesArray = conductTranscription(dnaSequencesArray);
+		System.out.println("\n");
+
+		//transcription output validation
+		boolean transcriptionOutputError =  validateTranscriptionResults(mRNASequencesArray);	
+		System.out.println("\n");
+
+		//translation
+		ArrayList<String> aminoAcidSequencesArray = conductTranslation(transcriptionOutputError, mRNASequencesArray);
 
 	}
 	
