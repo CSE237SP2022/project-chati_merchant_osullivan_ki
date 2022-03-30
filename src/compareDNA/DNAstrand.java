@@ -17,12 +17,18 @@ public class DNAstrand {
 	
 	public boolean validateDNAinput() {
 		boolean checker = false;
+		int numValidNucleotides = 0;
+		int numInValidNucleotides = 0;
 		for(int i = 0; i < lengthDNA; i++) {
 			if((DNAsequence.charAt(i) == 'A' || DNAsequence.charAt(i) == 'T' || DNAsequence.charAt(i) == 'C' || DNAsequence.charAt(i) == 'G')) {
-				checker = true;
+				numValidNucleotides++;
 			}else {
-				checker = false;
+				numInValidNucleotides++;
 			}
+		}
+		if (numValidNucleotides == lengthDNA) {
+			checker = true;
+			return checker;
 		}
 		return checker;
 	}
