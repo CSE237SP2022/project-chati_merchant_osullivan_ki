@@ -70,8 +70,8 @@ public class runCompareDNA {
 	    for (String dnaSequence : dnaSequencesArray) { 
 	    	List<String> dnaCodonsArray = new ArrayList<String>();
 	    	for (int i = 0; i < dnaSequence.length(); i += 3) {
-	 	       String newTestLine = dnaSequence.substring(i);
-	 	       String codon = newTestLine.substring(0, 3);
+	 	      String newTestLine = dnaSequence.substring(i);
+	 	      String codon = newTestLine.substring(0, 3);
 	 	      dnaCodonsArray.add(codon);
 	    	}
 	    	
@@ -79,7 +79,8 @@ public class runCompareDNA {
 	    	
 	    	for (String codon : dnaCodonsArray) {
 	    		for (Map.Entry<String, String> codonEntry : codonAminoAcidMap) {
-		            if (codonEntry.getKey().equals(codon)) {
+	    			String mRNACodonEntry = codonEntry.getKey().replace('T', 'U');
+		            if (mRNACodonEntry.equals(codon)) {
 		            	aminoAcidSequencesCharArray.add(codonEntry.getValue());
 		            }
 		        }	    		
