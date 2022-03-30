@@ -40,8 +40,12 @@ the nucleotide bases from each DNA strand. We can compare deletions and insertio
 - Once the mRNA sequences have been translated, pairwise similarities can be analyzed
 
 ### Pairwise Amino Acid Comparison
+- For now, the amino acid at each index for the two peptide chains is compared and the overall similarity is reported
+- The percentage similarity will account for insertions and deletions in future iterations
 
 ### Unit Tests for Validating Functionality
+- Unit tests were deeveloped to test reading in DNA sequences, testing the functionality of transcription and translation, and evaluating outputs
+- Further unit tests to test more robust performance will be developed during the second iteration
 
 ## Stories to Complete for Iteration 2
 
@@ -53,12 +57,34 @@ the nucleotide bases from each DNA strand. We can compare deletions and insertio
 
 ### Identify Sources of Insertions and Deletions Between DNA Sequences and Amino Acid Peptides
 
+### Identify Simple Folding Patterns Based on Amino Acid Residues
+
 ## Errors
 
 ### File Not Found Error
+- The first main error incurred involved the importation of text files corresponding to the amino acid dictionary and the DNA sequences
+- Originally, we incurred a file not found error, however, we resolved this by providing a more direct path to the file to avoid an ambiguity 
 
 ### JUnit Module Export Error
+- The JUnit tests would not true due to an error in the .classpath file and the module-info.java files
+- We imported the necessary requirements into module-info.java and exported the test package to JUnit 
+- We then changed the .classpath; this was done automiatically by the IDE
 
 ### DNA Sequence String Indexing Array while During Translation
+- When finding subsets of length 3 in the DNA sequences, we realized that sometimes, if the lenght was not divisble by three, there would be overhang string subsets that were less than length 2
+- Each codon needs to be specifically 3 nucleotide base pairs in order to be read, however, codons are read based on certain start and stop signals
+- Since we did not account for this, we included a temporary fix by making the test DNA sequences have lengths divisible by 3
+- A more robust correction would involve checking the overhang and ommitting if necessary
 
 ## Run Commands
+
+### Directions
+- Open a command prompt with the appropriate Java, Git, and OS versions
+- Once you have cloned the repository, ensure you are on the main branch (default)
+- Navigate into the src directory with the command "cd src"
+- From the src directory, if the program has not compilied, first run "javac compareDNA.runCompareDNA.java"
+- To then run the program once in src, call "java compareDNA.runCompareDNA testFiles/sameRandomDNASequences.txt"
+
+### Run Commands (Call in src Folder)
+- Compare same DNA sequences: java compareDNA.runCompareDNA testFiles/sameRandomDNASequences.txt
+- Compare drastically different DNA sequences: java compareDNA.runCompareDNA testFiles/differentRandomDNASequences.txt
