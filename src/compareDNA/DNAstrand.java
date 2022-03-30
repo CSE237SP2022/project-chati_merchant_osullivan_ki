@@ -38,7 +38,7 @@ public class DNAstrand {
 			}
 			if(DNAsequence.charAt(j) == 'T' ) {
 				percT++;
-			}
+			}      
 			if(DNAsequence.charAt(j) == 'C' ) {
 				percC++;
 			}
