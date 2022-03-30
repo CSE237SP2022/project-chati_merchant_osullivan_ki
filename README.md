@@ -53,4 +53,10 @@ the nucleotide bases from each DNA strand. We can compare deletions and insertio
 
 ## Errors
 
+### File Not Found Error
+
+### JUnit Module Export Error
+
+### DNA Sequence String Indexing Array while During Translation
+
 ## Run Commands
