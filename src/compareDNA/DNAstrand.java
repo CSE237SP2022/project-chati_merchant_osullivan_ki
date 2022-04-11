@@ -24,8 +24,8 @@ public class DNAstrand {
 				numValidNucleotides++;
 			}else {
 				numInValidNucleotides++;
-			}
-		}
+			} 
+		} 
 		if (numValidNucleotides == lengthDNA) {
 			checker = true;
 			return checker;
