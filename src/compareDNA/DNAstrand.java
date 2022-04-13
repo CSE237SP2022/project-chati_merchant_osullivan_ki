@@ -70,6 +70,7 @@ public class DNAstrand {
 				} else {
 					System.out.printf("DNA Sequence %d is Not Valid. Please check that the inputed sequence is DNA. \n", dnaStrandIndex);
 					isDNAValid = false;
+					return isDNAValid;
 				} 
 			} 
 			

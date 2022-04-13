@@ -24,33 +24,6 @@ import compareDNA.translation;
 
 public class runCompareDNA {
 	
-	
-	public boolean validateTranscriptionResults(ArrayList<String> mRNASequencesArray) throws FileNotFoundException {
-		int dnaStrandIndex = 1;
-		boolean transcriptionOutputError = false;
-		
-		System.out.println("Validate Transcription Outputs");
-		
-		for (String mRNASequence : mRNASequencesArray) { //make sure that dna sequences have been stored in the array
-
-			validateTranscriptionOutputs transcriptionValidator;
-			transcriptionValidator = new validateTranscriptionOutputs();
-			
-			boolean isRNAValid = transcriptionValidator.validator(mRNASequence);
-			
-			if (isRNAValid) {
-				System.out.printf("mRNA Sequence %d is Valid \n", dnaStrandIndex);
-			}
-			else {
-				System.out.printf("mRNA Sequence %d is Not Valid. It contains the nucleotide T. \n", dnaStrandIndex);
-				transcriptionOutputError = true;
-			}
-			dnaStrandIndex++;
-			
-		}
-		return transcriptionOutputError;
-	}
-	
 	public ArrayList<String> conductTranslation(boolean transcriptionOutputError, ArrayList<String> mRNASequencesArray) throws Exception {
 		ArrayList<String> aminoAcidSequencesArray;
 		if (!transcriptionOutputError) {
@@ -90,17 +63,18 @@ public class runCompareDNA {
 		//validate dna input and compute dna statistics
 		DNAstrand dnaInputValidation = new DNAstrand(dnaSequencesArray);
 		
-		//transcription
+		//conduct transcription
 		transcription transcriptionModule = new transcription();
 		ArrayList<String> mRNASequencesArray = transcriptionModule.transcription(dnaSequencesArray);
 		System.out.println("\n");
 
-		//transcription output validation
-		boolean transcriptionOutputError =  validateTranscriptionResults(mRNASequencesArray);	
+		//validate transcription outputs
+		validateTranscriptionOutputs transcriptionValidator = new validateTranscriptionOutputs();
+		boolean isRNAValid =  transcriptionValidator.validator(mRNASequencesArray);	
 		System.out.println("\n");
 
 		//translation
-		ArrayList<String> aminoAcidSequencesArray = conductTranslation(transcriptionOutputError, mRNASequencesArray);
+		ArrayList<String> aminoAcidSequencesArray = conductTranslation(isRNAValid, mRNASequencesArray);
 
 	}
 	

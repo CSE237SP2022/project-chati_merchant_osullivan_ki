@@ -1,24 +1,32 @@
 package compareDNA;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
 public class validateTranscriptionOutputs {
-
-    public boolean validator(String x) {
-        int success = 0;
-        boolean isRNA = true;
-        String [] sentence = new String [x.length()];
-        for(int i = 0; i < x.length(); i++){
-            sentence[i] = String.valueOf(x.charAt(i));
-        }
-        if (x.contains("T")) { //Checks if the "mRNA has a t or not." Not mRNA if there is a T
-        	isRNA = false;
-        	return isRNA;
-        }
-        
-        if (x.contains("U")) { //if there is a U, then it's not DNA. So return not dna or rna
-            return isRNA;
-        } 
-
-        System.out.println(sentence);
-        return isRNA; //return a success if there is no t or u in the mRNA passed into this.
+	
+    public boolean validator(ArrayList<String> mRNASequencesArray) {
+    	
+    	System.out.println("Validate Transcription Outputs");
+    	
+    	int dnaStrandIndex = 0;
+    	
+    	boolean isRNAValid = true;
+    	
+    	for (String mRNASequence : mRNASequencesArray) {      
+       
+            if (mRNASequence.contains("T")) { //Checks if the "mRNA has a t or not." Not mRNA if there is a T
+            	System.out.printf("mRNA Sequence %d is Not Valid. It contains the nucleotide T. \n", dnaStrandIndex);
+            	isRNAValid = false;
+            	return isRNAValid;
+            } else {
+            	System.out.printf("mRNA Sequence %d is Valid \n", dnaStrandIndex);
+            }
+            
+            dnaStrandIndex++;
+    	}
+    	
+    	return isRNAValid;
+    	
     }
 }
