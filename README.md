@@ -109,6 +109,14 @@ The second iteration primarily focused on revising errors found during the first
 
 ## Stories Completed
 
+### Unit Tests for Validating Functionality
+
+### Detection of Point Mutations
+
+### Pairwise Comparison of Amino Acid Chains
+
+### Code Structure and Cleanliness
+
 ## Stories to Complete for Iteration 3
 
 ## Errors and Challenges
