@@ -39,6 +39,7 @@ public class transcription {
 			System.out.printf("DNA Sequence %d: %s \n", dnaStrandIndex, dnaSequence);
 			System.out.printf("RNA Sequence %d: %s \n", dnaStrandIndex, mRNAsequence);
 
+			dnaStrandIndex++;
 		}
 		
 		return mRNASequencesArray;
