@@ -105,7 +105,7 @@ And yes, this program was named after the world famous scientist and inventor [D
 
 ## Iteration 2 Overview
 
-The second iteration primarily focused on revising errors found during the first iteration while improving the structure of the code, inclduing cleanliness and conciseness. Along with improving the code structure, we also implemented added functionality to our program. These updates can be found below. In addition, the a set of commands can be found at the bottom of this document. 
+The second iteration primarily focused on revising errors found during the first iteration while improving the structure of the code, inclduing cleanliness and conciseness. We also updated the unit tests - they were made shorter and each unit test now corresponds with a method or functionality of our program. Along with improving the code structure, we also implemented added functionality to our program. These updates can be found below. In addition, the a set of commands can be found at the bottom of this document. 
 
 ## Stories Completed
 
