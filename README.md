@@ -146,7 +146,7 @@ The second iteration primarily focused on revising errors found during the first
 - The third iteration will revolve around functionality and running the program more efficiently
 - This involves adding more complex analysis modules, being able to call or turn off certain analysis functions, and using an API to compare output results
 
-### Generating a Script 
+### Generating a More Comprehensive Script 
 - We have a preliminary script working; the details are listed below in the __Run Commands__ section, however, we are aiming to develop a more comprehensive script for the following iteration
 - We want to finalize our script for the coming iteration; the script will be able to run the program while taking in a file as the input
 - We also are experimenting with the idea of being able to call certain analysis functions based on the arguments provided to the scripts
