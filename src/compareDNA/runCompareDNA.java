@@ -23,24 +23,6 @@ import compareDNA.translation;
 //create mappings from input to output: https://www.baeldung.com/java-map-entry
 
 public class runCompareDNA {
-	
-	public ArrayList<String> conductTranslation(boolean transcriptionOutputError, ArrayList<String> mRNASequencesArray) throws Exception {
-		ArrayList<String> aminoAcidSequencesArray;
-		if (!transcriptionOutputError) {
-			int dnaStrandIndex = 1;			
-			System.out.println("Conduct Translation from mRNA to Amino Acid Chain");			
-			translation conductTranslation;
-			conductTranslation = new translation();		
-			aminoAcidSequencesArray = conductTranslation.translater(mRNASequencesArray);		
-			for (String peptideChain : aminoAcidSequencesArray) {
-				System.out.printf("Peptide Chain Sequence %d: %s \n", dnaStrandIndex, peptideChain);
-			}
-		}
-		else {
-			throw new Exception("There is an error in the outputed mRNA Sequences. Please review the mRNA strands prior to conducting translation.");
-		}
-		return aminoAcidSequencesArray;
-	}
 
 	// run program and call methods above sequentially
 	public static void main(String[] args) throws Exception { //IOException added
@@ -58,10 +40,12 @@ public class runCompareDNA {
 			System.out.printf("DNA Sequence %d: %s \n", dnaStrandIndex, dnaSequence);
 			dnaStrandIndex++;
 		}
+		
 		System.out.println("\n");
 		
 		//validate dna input and compute dna statistics
 		DNAstrand dnaInputValidation = new DNAstrand(dnaSequencesArray);
+		System.out.println("\n");
 		
 		//conduct transcription
 		transcription transcriptionModule = new transcription();
@@ -74,7 +58,8 @@ public class runCompareDNA {
 		System.out.println("\n");
 
 		//translation
-		ArrayList<String> aminoAcidSequencesArray = conductTranslation(isRNAValid, mRNASequencesArray);
+		translation translationModule = new translation();
+		ArrayList<String> aminoAcidSequencesArray = translationModule.translater(mRNASequencesArray, isRNAValid);
 
 	}
 	
