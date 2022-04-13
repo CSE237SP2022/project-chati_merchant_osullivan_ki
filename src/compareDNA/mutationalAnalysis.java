@@ -29,7 +29,7 @@ public class mutationalAnalysis {
     	}
     	
     	return mutationsArray;
-    	
+    	 
     }
     
     public List<Map.Entry<Integer, ArrayList<Character>>> detectionPointInsertion(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {

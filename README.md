@@ -101,7 +101,88 @@ And yes, this program was named after the world famous scientist and inventor [D
 - One challenge we are still working on is properly discovering insertions and deletions between two peptide chains
 - Since insertions and deletions can cause difference in lengths of the chains and may cause index changes, more robust statistical models need to be used
 
-## Run Commands
+# Iteration 2 | 04/13/2022
+
+## Iteration 2 Overview
+
+The second iteration primarily focused on revising errors found during the first iteration while improving the structure of the code, inclduing cleanliness and conciseness. We also updated the unit tests - they were made shorter and each unit test now corresponds with a method or functionality of our program. Along with improving the code structure, we also implemented added functionality to our program. These updates can be found below. In addition, the a set of commands can be found at the bottom of this document. 
+
+## Stories Completed
+
+### Program Script
+- We have generated a script to call the program; the script is labeled __runCompareDNA.sh__ and is in the __src__ folder
+- Instructions on how to use the script are in the __Run Commands__ section; we are aiming to expand the script and resolve withstanding errors for the final iteration
+
+### Code Structure and Cleanliness
+- As mentioned in the overview, this method was less about adding functionality and more about cleaning up the code structure; the final iteration will focus on maintaining the structure and cleanliness while significantly improving functionality
+- To begin, we altered our runDNACompare.java class to remove unnecessary static declarations, condense classes, and improve general structure
+- Next, we went through each class and modified the code such it prints the outputs properly and can be called independently during unit testing
+- We also implemented a few other functional modules, however, they have yet to be integrated with the entire program
+- Finally, we began working on a script to run the program, however, this has led to numerous unexpected errors; this will be detailed in the challenges section
+
+### Unit Tests for Validating Functionality
+- Unit tests were added for each method implemented in the runCompareDNA.java class
+- Unit tests still need to be developed for added methods such as detecting point mutations; this will be done in the following iteration
+- All unit tests pass for methods up to and including translation
+
+### Detection of Point Mutations
+- The program can now parse through two DNA sequences, the first one being a reference sequence and second one being a mutated sequence, and identify sources of point mutations
+- Point mutations are changes in a single nucleotide base pair at one position; this includes insertions, deletions, and subsitutions
+- The future iteration will focus on integrating all three of aforementioned mutation types to make a comprehensive mutation detection system
+- We are still refining the functionality of the mutational detection module; it will be completely implemented in the following iteration
+
+### Begin and Terminate Translation at Approrpiate Codons
+- The program can now begin and terminate translation based on the appropriate start and stop codons; this is vital for being able to read DNA sequences that have lengths indivisible by three
+- The class is complete and functional; we are working on integrating this function with our entire program for the following iteration
+
+### Pairwise Comparison of Amino Acid Chains
+- We implemented and completed a pairwise checking module that compares the outputted amino acid chains during the translation step
+- The module checks overlap and documents the percentage similarity between two amino acid chains
+- We are currently working on integrating this module into the entire program; then we aim to develop unit tests to test edge cases
+
+## Stories to Complete for Iteration 3
+
+### Improving Functionality
+- The third iteration will revolve around functionality and running the program more efficiently
+- This involves adding more complex analysis modules, being able to call or turn off certain analysis functions, and using an API to compare output results
+
+### Generating a More Comprehensive Script 
+- We have a preliminary script working; the details are listed below in the __Run Commands__ section, however, we are aiming to develop a more comprehensive script for the following iteration
+- We want to finalize our script for the coming iteration; the script will be able to run the program while taking in a file as the input
+- We also are experimenting with the idea of being able to call certain analysis functions based on the arguments provided to the scripts
+
+### Complete Mutation Detection
+- This module, we implemented a method to detect point mutations; the following iteration will integrate this method into the main program and adapt it such that it can detect mutations of any size to a reasonable degree
+- We intend to employ more rigorous statistical models for this portion of the project
+
+### Integrate Pairwise Comparator 
+- We completed a pairwise amino acid analysis method this iteration; the next iteration will focus on integrating this module with the entire program
+- We are also working on using the SwissProt API to compare outputs of program to real amino acid chains to detection potential patterns and folding regimes
+
+### Complete Unit Testing
+- The final iteration will have complete unit tests for all of the aforementioned methods we are aiming to integrate with our main program
+- This also means generating more test files; this iteration we toggled the test files to help with unit testing, and the following iterations, we are going to add test files that resemble true DNA sequences
+
+## Errors and Challenges
+
+### Scripting Errors
+- This iteration, we ran into way more errors than the last iteration primarily because we were more focused on code structure than actual functionality
+- We are currently dealing with several errors when using a script to run the java program; we aim to have these issues resolved by the final iteration
+- It seems the errors have something to do with not using the proper java versions, however, we need to dig deeper in order to better understand the problem
+
+### Frameshift Challenge when Detecting Start Codon
+- During the phase where we were detecting the start codons, we initially ran into a challenge with parsing the DNA sequence
+- We resolved this by taking every single 3-mer of the DNA string, and identifying where the beginning of a start codon was; this is currently implemented in a brute-force manner, however, we expect that some dynamic programming methods may be employable here
+
+#### Detecting Mutations
+- We were able to detect mutations in the middle of sequences, however, we are still handing edge cases, such as detecting mutations at the beginning or end of a sequence
+- This is particularly tough for insertions and deletions because you have to shift the frame or view of the DNA sequence temporarily in order to understand how deep the mutation is
+
+# Run Commands
+
+### Overview
+
+For this section, you must be in the __src__ folder. You can enter this folder from the main project folder by using __cd src__. Once done, you can either follow the directions to compile the code below or call the script based on the directions in the __Script__ section. Since we are still error handling the script, if there are any errors in the script, please follow the __Directions__ and __List of Commands__ sections below as an alternative.
 
 ### Directions
 - Open a command prompt with the appropriate Java, Git, and OS versions
@@ -116,3 +197,7 @@ And yes, this program was named after the world famous scientist and inventor [D
 - Compare same DNA sequences: __java compareDNA.runCompareDNA testFiles/sameRandomDNASequences.txt__
 - Compare drastically different DNA sequences: __java compareDNA.runCompareDNA testFiles/differentRandomDNASequences.txt__
 - Non-DNA sequences (throws DNA validation exception): __java compareDNA.runCompareDNA testFiles/notDNASequences.txt__
+
+### Script
+- Either you can run the commands above, or you can enter the __src__ via __cd src__ and call the __runCompareDNA.sh__ script with the appropriate filename
+- For example, you can call __bash__ and then __runCompareDNA.sh testFiles/surpriseDNASequences.txt__
