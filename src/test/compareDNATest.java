@@ -27,7 +27,7 @@ public class compareDNATest {
 	
 
 	@Test
-	public void testReadDNASequences() throws FileNotFoundException {
+	public static void testReadDNASequences() throws FileNotFoundException {
 		
 //		String[] dnaSequencesFilePathArray = {"testFiles/sameRandomDNASequences.txt"};
 		

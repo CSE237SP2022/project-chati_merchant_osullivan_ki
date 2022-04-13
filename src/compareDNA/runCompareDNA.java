@@ -16,21 +16,12 @@ import java.util.Set;
 import compareDNA.validateTranscriptionOutputs;
 import compareDNA.translation;
 import compareDNA.DNAstrand;
+import compareDNA.readDNAInput;
 
 //citations
 //create mappings from input to output: https://www.baeldung.com/java-map-entry
 
 public class runCompareDNA {
-	
-	public ArrayList<String> readDNAInputToArray(String filePath) throws FileNotFoundException {
-		ArrayList<String> dnaSequencesArray = new ArrayList<String>(); //create array list for the dna sequences
-		Scanner dnaSequenceInputFile = new Scanner(new File(filePath)); //read the sequences through the command line
-		while (dnaSequenceInputFile.hasNextLine()) {
-			String dnaSequence = dnaSequenceInputFile.nextLine(); //store each next dna sequence in the array
-			dnaSequencesArray.add(dnaSequence); //store each next dna sequence in the array
-		}
-		return dnaSequencesArray;
-	}
 	
 	public boolean validateInputDNASequences(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
 		int dnaStrandIndex = 1;
@@ -155,8 +146,10 @@ public class runCompareDNA {
 		
 		System.out.println("\n");
 		
+		readDNAInput readInput = new readDNAInput();
+		
 		//setup
-		ArrayList<String> dnaSequencesArray = readDNAInputToArray(args[0]);
+		ArrayList<String> dnaSequencesArray = readDNAInput.readDNAInputToArray(args[0]);
 		
 		//output provided dna sequences
 		int dnaStrandIndex = 1; 
