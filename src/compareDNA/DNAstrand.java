@@ -124,23 +124,4 @@ public class DNAstrand {
 
 	}
 	
-	public String DNAtomRNA() {
-		String mRNAsequence = "";
-		for(int j = 0; j < lengthDNA; j++) {
-			if(DNAsequence.charAt(j) == 'A' ) {
-				mRNAsequence += 'U';
-			}
-			else if(DNAsequence.charAt(j) == 'T' ) {
-				mRNAsequence += 'A';
-			}
-			else if(DNAsequence.charAt(j) == 'C' ) {
-				mRNAsequence += 'G';
-			}
-			else if(DNAsequence.charAt(j) == 'G' ) {
-				mRNAsequence += 'C';
-			}
-		}
-		
-		return mRNAsequence;
-	}
 }
