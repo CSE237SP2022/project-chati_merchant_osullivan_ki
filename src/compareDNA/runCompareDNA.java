@@ -35,12 +35,13 @@ public class runCompareDNA {
 		System.out.println("\n");
 		
 		//validate dna input and compute dna statistics
-		DNAstrand dnaInputValidation = new DNAstrand(dnaSequencesArray);
+		DNAstrand dnaInputValidation = new DNAstrand();
+		dnaInputValidation.runDNAstrand(dnaSequencesArray);
 		System.out.println("\n");
 		
 		//conduct transcription
 		transcription transcriptionModule = new transcription();
-		ArrayList<String> mRNASequencesArray = transcriptionModule.transcription(dnaSequencesArray);
+		ArrayList<String> mRNASequencesArray = transcriptionModule.conductTranscription(dnaSequencesArray);
 		System.out.println("\n");
 
 		//validate transcription outputs

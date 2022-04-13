@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,141 +29,130 @@ import compareDNA.translation;
 
 public class compareDNATest {
 	
-	//readDNAInput
+	//create a set of variables to be defined during the setup
+	private String sampleDNASequence;
+	private String invalidDNASequence;
+	private String sampleRNASequence;
+	private ArrayList<String> sampleDNASequencesArray;
+	private ArrayList<String> invalidDNASequencesArray;
+	private ArrayList<Integer> sampleDNALengthsArray;
+	private List<Double> sampleDNASequenceStatistics;
+	private List<List<Double>> sampleDNAStatisticsArray;
+	private ArrayList<String> sampleRNASequencesArray;
 	
-	//readDNAInputToArray method: check if sequences are being read in properly from the text file inputs
+	//setup - create a set of sample dna and mrna sequences that can be used repeatedly for testing purposes and predefine outputs from methods we are testing
+	@Before
+	public void setup() {
+		sampleDNASequence = "AAAAAATTTTTTCCCCCCGGGGGG";
+		invalidDNASequence = "AAAAAATSDFGSTTGGGGGSDFCD";
+		sampleRNASequence = "UUUUUUAAAAAAGGGGGGCCCCCC";
+		
+		//create array for sample and invalid dna sequences
+		sampleDNASequencesArray = new ArrayList<String>(Arrays.asList(sampleDNASequence,sampleDNASequence));
+		invalidDNASequencesArray = new ArrayList<String>(Arrays.asList(invalidDNASequence,invalidDNASequence));
+		
+		//create array containing lengths of sample sequences
+		sampleDNALengthsArray = new ArrayList<Integer>(Arrays.asList(24,24));
+		
+		//create array containing statistics for sample dna sequences
+		sampleDNASequenceStatistics = new ArrayList<Double>(Arrays.asList(0.25,0.25,0.25,0.25));
+		sampleDNAStatisticsArray = new ArrayList<List<Double>>(Arrays.asList(sampleDNASequenceStatistics,sampleDNASequenceStatistics));
+		
+		//create array for mrna sequences generated through transcription
+		sampleRNASequencesArray = new ArrayList<String>(Arrays.asList(sampleRNASequence,sampleRNASequence));
+	}
+	
+	
+	//Class: readDNAInput
+	
+	//Method: readDNAInputToArray - check if sequences are being read in properly from the text file inputs
 	@Test
-	public static void testReadDNASequences() throws FileNotFoundException {
+	public void testReadDNASequences() throws FileNotFoundException {
 		
 //		String[] dnaSequencesFilePathArray = {"testFiles/sameRandomDNASequences.txt"};
 		
 		//read in file path and collect output array containing dna sequences
 		readDNAInput readInput = new readDNAInput();
-		ArrayList<String> dnaSequencesArray = readDNAInput.readDNAInputToArray("src/testFiles/sameRandomDNASequences.txt");
-				
-		//manually store dna strands from the inputed test file
-		String trueDNASequence1 = "ATGCGATCGATCTAGATCGATATGCGATTCGATGCTTATATATAAAAGCGCTATAGCATCGATCGATCGATCAGG";
-		String trueDNASequence2 = "ATGCGATCGATCTAGATCGATATGCGATTCGATGCTTATATATAAAAGCGCTATAGCATCGATCGATCGATCAGG";
-		
+		ArrayList<String> dnaSequencesArray = readDNAInput.readDNAInputToArray("src/testFiles/sameShortDNASequences.txt");
+						
 		//check that the dna sequence array contains only 2 dna strands, otherwise raise an error
 		assertTrue("DNA sequences array does not contain 2 DNA strands. Please check input file or function.", dnaSequencesArray.size() == 2);
 		
 		//check manually that the two strands being read in correspond to the dna sequences in the file
-		assertTrue("The inputed first DNA sequence does not match the true first DNA sequence", dnaSequencesArray.get(0).equals(trueDNASequence1));
-		assertTrue("The inputed second DNA sequence does not match the true second DNA sequence", dnaSequencesArray.get(1).equals(trueDNASequence2));
+		assertTrue("The inputed first DNA sequence does not match the true first DNA sequence", dnaSequencesArray.get(0).equals(sampleDNASequence));
+		assertTrue("The inputed second DNA sequence does not match the true second DNA sequence", dnaSequencesArray.get(1).equals(sampleDNASequence));
 	}
 	
+	//Class: DNAstrand
+	
+	//Method: validateDNAinput - check that the dna inputs are being validated properly
 	@Test
 	public void testInputDNAValidation() throws FileNotFoundException {		
-
-		//create a set of correct dna sequences
-		ArrayList<String> correctDNASequences = new ArrayList<>();
-		correctDNASequences.add("ATGCGATCGATCTAGATCGATATGCGATTCGATGCTTATATATAAAAGCGCTATAGCATCGATCGATCGATCAGG");
-		correctDNASequences.add("ATGCGATCGATCTAGATCGATATGCGATTCGATGCTTATATATAAAAGCGCTATAGCATCGATCGATCGATCAGG");
 		
-		//create a set of incorrect dna sequences - contain characters that are not base pairs
-		ArrayList<String> incorrectDNASequences = new ArrayList<>();
-		incorrectDNASequences.add("ATGCGATCGATCTAGATCGATATGCZDZFDGTTCGATGCTTATATATAAAAGATAGCATCGATCGATCGATCAGG");
-		incorrectDNASequences.add("ATGCGATCGATCTAGATCGATATGCGATTCGATGCTTATATATAADKFGBSCGCAGCATCGATCGATCGATCAGG");
-		
-		boolean correctDNAValidationOutput = runCompareDNA.validateInputDNASequences(correctDNASequences);
-		boolean incorrectDNAValidationOutput = runCompareDNA.validateInputDNASequences(incorrectDNASequences);
+		//validate dna input based on sample and invalid dna sequences defined during the setup
+		DNAstrand dnaInputValidation = new DNAstrand();
+		boolean correctDNAValidationOutput = dnaInputValidation.validateDNAinput(sampleDNASequencesArray);
+		boolean incorrectDNAValidationOutput = dnaInputValidation.validateDNAinput(invalidDNASequencesArray);
 		
 		//check that correct and incorrect dna sequences raise an error indicated invalidity
-		assertTrue("The correct DNA sequences are being evaluated as invalid.", correctDNAValidationOutput == false); //false: no error
-		assertTrue("The incorrect DNA sequences are being evaluated as valid.", incorrectDNAValidationOutput == true);//true: there is an error in sequences
+		assertTrue("The correct DNA sequences are being evaluated as invalid.", correctDNAValidationOutput == true); 
+		assertTrue("The incorrect DNA sequences are being evaluated as valid.", incorrectDNAValidationOutput == false);
 	}
 
+	//Method: computeDNALengths - see if the lengths of each DNA sequence are properly returned
 	@Test
-	public void testComputeDNAStatistics() throws Exception {		
+	public void testComputeDNALengths() throws Exception {	
+		
+		//run compute lengths method
+		ArrayList<Integer> testDNALengthsArray;
+		DNAstrand computeSequenceLengthsModule = new DNAstrand();
+		testDNALengthsArray = computeSequenceLengthsModule.computeDNALengths(sampleDNASequencesArray);
+		
+		//compare outputs to ground truth lengths defined in the setup
+		assertTrue("The DNA sequence lengths are incorrect.", sampleDNALengthsArray.equals(testDNALengthsArray)); 
 
-		//create a set of dna sequences containing only adenine nucleotides
-		ArrayList<String> sampleDNASequencesPolyA = new ArrayList<>();
-		sampleDNASequencesPolyA.add("AAAAAAAAAAAAAAA");
-		sampleDNASequencesPolyA.add("AAAAAAAAAAAAAAA");
-
-		//create a set of dna sequences containing half of one nucleotide and half of another
-		ArrayList<String> sampleDNASequencesHalf = new ArrayList<>();
-		sampleDNASequencesHalf.add("AAAAAAAAAAAAAAAGGGGGGGGGGGGGGG");
-		sampleDNASequencesHalf.add("CCCCCCCCCCCCCCCTTTTTTTTTTTTTTT");
 		
-		//create a set of dna sequences containing equal percentages of each nucleotide
-		ArrayList<String> sampleDNASequencesAllEqual = new ArrayList<>();
-		sampleDNASequencesAllEqual.add("AAAAAAGGGGGGCCCCCCTTTTTT");
-		sampleDNASequencesAllEqual.add("AAAAAAGGGGGGCCCCCCTTTTTT");
-		
-		//assume we have no error in the dna strands because the step comes prior to computing statistics
-		boolean dnaStrandError = false;
-		
-		
-		//compute statistics on various input lists generated above - order of nucleotide percentages: {A,T,C,G}
-		List<List<Double>> dnaStatisticsListPolyA = runCompareDNA.computeDNAStatistics(dnaStrandError, sampleDNASequencesPolyA);
-		List<List<Double>> dnaStatisticsListHalf = runCompareDNA.computeDNAStatistics(dnaStrandError, sampleDNASequencesHalf);
-		List<List<Double>> dnaStatisticsListAllEqual = runCompareDNA.computeDNAStatistics(dnaStrandError, sampleDNASequencesAllEqual);
-		
-		//manually add percentages
-		
-		//poly adenine
-		List<List<Double>> polyAStatisticsList = new ArrayList<>();
-		List<Double> polyAStatistics = new ArrayList<>();
-		polyAStatistics.add(1.0);
-		polyAStatistics.add(0.0);
-		polyAStatistics.add(0.0);
-		polyAStatistics.add(0.0);
-		polyAStatisticsList.add(polyAStatistics);
-		polyAStatisticsList.add(polyAStatistics);
-		
-		//half
-		List<List<Double>> halfStatisticsList = new ArrayList<>();
-		List<Double> halfStatistics1 = new ArrayList<>();
-		halfStatistics1.add(0.5);
-		halfStatistics1.add(0.0);
-		halfStatistics1.add(0.0);
-		halfStatistics1.add(0.5);
-		halfStatisticsList.add(halfStatistics1);
-		
-		List<Double> halfStatistics2 = new ArrayList<>();
-		halfStatistics2.add(0.0);
-		halfStatistics2.add(0.5);
-		halfStatistics2.add(0.5);
-		halfStatistics2.add(0.0);
-		halfStatisticsList.add(halfStatistics2);
-		
-		//all equal
-		List<List<Double>> allEqualStatisticsList = new ArrayList<>();
-		List<Double> allEqualStatistics = new ArrayList<>();
-		allEqualStatistics.add(0.25);
-		allEqualStatistics.add(0.25);
-		allEqualStatistics.add(0.25);
-		allEqualStatistics.add(0.25);
-		allEqualStatisticsList.add(allEqualStatistics);
-		allEqualStatisticsList.add(allEqualStatistics);
-
-		//check that correct and incorrect dna sequences raise an error indicated invalidity
-		assertTrue("The nucleotide compositions of the poly A DNA Sequences are incorrect", polyAStatisticsList.equals(dnaStatisticsListPolyA)); 
-		assertTrue("The nucleotide compositions of the half DNA Sequences are incorrect", halfStatisticsList.equals(dnaStatisticsListHalf));
-		assertTrue("The nucleotide compositions of the equal DNA Sequences are incorrect", allEqualStatisticsList.equals(dnaStatisticsListAllEqual));
-
 	}
 	
+	//Method: calculateDNAstats - check dna statistics when we use arrays of mixed dna base pairs
+	@Test
+	public void testComputeDNAStatistics() throws Exception {		
+		
+		//assume we have no error in the dna strands because the step comes prior to computing statistics
+		boolean isDNAValid = true;
+		
+		//compute statistics on various input lists generated above - order of nucleotide percentages: {A,T,C,G}
+		DNAstrand computeDNAPercentages = new DNAstrand();
+		List<List<Double>> testDNAStatisticsArray = computeDNAPercentages.calculateDNAstats(sampleDNASequencesArray);
+						
+		//check that correct and incorrect dna sequences raise an error indicated invalidity
+		assertTrue("The nucleotide compositions of the equal DNA Sequences are incorrect", sampleDNAStatisticsArray.equals(testDNAStatisticsArray));
+	}
+	
+	//Class: transcription
+	
+	//Method: conductTranscription - check that the dna sequences are being converted to mrna sequences
 	@Test
 	public void testConductTranscription() throws Exception {
+				
+		//conduct transcription on sample dna sequences
+		transcription transcriptionModule = new transcription();
+		ArrayList<String> transcriptionOutputs = transcriptionModule.conductTranscription(sampleDNASequencesArray);
 		
-		//create a set of lists containing all the nucleotides
-		ArrayList<String> sampleDNASequence = new ArrayList<>();
-		sampleDNASequence.add("AAAAAATTTTTT");
-		sampleDNASequence.add("CCCCCCGGGGGG");
+		//check outputs
+		assertTrue("Transcription was not conducted carefully. Please check the outputs.", sampleRNASequencesArray.equals(transcriptionOutputs)); 
 		
-		//create expected dna sequences
-		ArrayList<String> expectTranscriptionOutputs = new ArrayList<>();
-		expectTranscriptionOutputs.add("UUUUUUAAAAAA");
-		expectTranscriptionOutputs.add("GGGGGGCCCCCC");
+	} 
+	
+	@Test
+	public void testValidateTranscriptionOuputs() throws Exception {
 		
-		//conduct transcription 
-		ArrayList<String> transcriptionOutputs = runCompareDNA.conductTranscription(sampleDNASequence);
 		
-		assertTrue("Transcription was not conducted carefully. Please check the outputs.", expectTranscriptionOutputs.equals(transcriptionOutputs)); 
-
+	} 
+	
+	@Test
+	public void testConductTranslation() throws Exception {
+		
 		
 	} 
 

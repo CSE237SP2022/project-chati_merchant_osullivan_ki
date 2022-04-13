@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class transcription {
 	
-	public ArrayList<String> transcription(ArrayList<String> dnaSequencesArray) {	
+	public ArrayList<String> conductTranscription(ArrayList<String> dnaSequencesArray) {	
 		
 		int dnaStrandIndex = 0;
 

@@ -5,32 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DNAstrand {
-	int percA = 0;
-	int percC = 0;
-	int percT = 0;
-	int percG = 0;
-	
-	double percentageA = 0;
-	double percentageT = 0;
-	double percentageC = 0;
-	double percentageG = 0;
-	
-	ArrayList<Integer> dnaLengthsArray;
-		
+			
 //	String DNAsequence;
 	
-	public DNAstrand(ArrayList<String> dnaSequencesArray) throws Exception {
+	public void runDNAstrand(ArrayList<String> dnaSequencesArray) throws Exception {
 //		DNAsequence = sequence;
-				
-		//compute lengths of dna sequences
-		this.computeDNALengths(dnaSequencesArray);
-		
+						
 		//validate dna input read through command line
 		boolean isDNAValid = this.validateDNAinput(dnaSequencesArray);
 		
 		//if the dna strands are valid, compute dna statistics
 		if(isDNAValid) {
-			this.calculateDNAstats(dnaSequencesArray);
+			List<List<Double>> dnaStatisticsArray = this.calculateDNAstats(dnaSequencesArray);
 		} else {
 			throw new Exception("There is an error in the provided DNA sequences. Please review the input files prior to computing statistics.");
 		}
@@ -38,23 +24,24 @@ public class DNAstrand {
 		
 	}
 	
-	public void computeDNALengths(ArrayList<String> dnaSequencesArray) {
+	public ArrayList<Integer> computeDNALengths(ArrayList<String> dnaSequencesArray) {
 		
-		dnaLengthsArray = new ArrayList<>();
+		ArrayList<Integer> dnaLengthsArray = new ArrayList<>();
 		
 		for (String dnaSequence : dnaSequencesArray) {
 			int dnaLength = dnaSequence.length();
 			dnaLengthsArray.add(dnaLength);
 		}
 		
+		return dnaLengthsArray;
 	}
 
 	
 	public boolean validateDNAinput(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
 		
-		
 		int dnaStrandIndex = 0;
 		boolean isDNAValid = true;
+		ArrayList<Integer> dnaLengthsArray = this.computeDNALengths(dnaSequencesArray);
 		
 		System.out.println("Evaluate Inputed DNA Sequences");
 		
@@ -86,15 +73,24 @@ public class DNAstrand {
 	}
 	
 	
-	public void calculateDNAstats(ArrayList<String> dnaSequencesArray) {
+	public List<List<Double>> calculateDNAstats(ArrayList<String> dnaSequencesArray) {
 		
 		int dnaStrandIndex = 0;
+		List<List<Double>> dnaStatisticsArray = new ArrayList<>();
+		ArrayList<Integer> dnaLengthsArray = this.computeDNALengths(dnaSequencesArray);
 		
 		System.out.println("Compute DNA Sequence Length Nucleotide Composition");
 		
 		for (String dnaSequence : dnaSequencesArray) {
 		
 			int lengthDNA = dnaLengthsArray.get(dnaStrandIndex);
+			
+			List<Double> dnaSequenceStatistics = new ArrayList<>();
+			
+			int percA = 0;
+			int percC = 0;
+			int percT = 0;
+			int percG = 0;
 			
 			for(int dnaIndex = 0; dnaIndex < lengthDNA; dnaIndex++) {
 				if(dnaSequence.charAt(dnaIndex) == 'A' ) {
@@ -111,10 +107,16 @@ public class DNAstrand {
 				}
 			}
 			
-			percentageA = (double) percA/lengthDNA;
-			percentageT = (double) percT/lengthDNA;
-			percentageC = (double) percC/lengthDNA;
-			percentageG = (double) percG/lengthDNA;
+			double percentageA = (double) percA/lengthDNA;
+			double percentageT = (double) percT/lengthDNA;
+			double percentageC = (double) percC/lengthDNA;
+			double percentageG = (double) percG/lengthDNA;
+			
+			dnaSequenceStatistics.add(percentageA);
+			dnaSequenceStatistics.add(percentageT);
+			dnaSequenceStatistics.add(percentageC);
+			dnaSequenceStatistics.add(percentageG);
+			dnaStatisticsArray.add(dnaSequenceStatistics);
 			
 			System.out.printf("DNA Sequence %d Length: %d \n", dnaStrandIndex, lengthDNA);
 			System.out.printf("DNA Sequence %d Nucleotide Composition: A: %f | T: %f | C: %f | G: %f  \n", dnaStrandIndex, percentageA, percentageT, percentageC, percentageG);
@@ -122,7 +124,9 @@ public class DNAstrand {
 			dnaStrandIndex++;
 		}
 		
+		return dnaStatisticsArray;
 
 	}
+	
 	
 }
