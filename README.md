@@ -109,6 +109,10 @@ The second iteration primarily focused on revising errors found during the first
 
 ## Stories Completed
 
+### Program Script
+- We have generated a script to call the program; the script is labeled __runCompareDNA.sh__ and is in the __src__ folder
+- Instructions on how to use the script are in the __Run Commands__ section; we are aiming to expand the script and resolve withstanding errors for the final iteration
+
 ### Code Structure and Cleanliness
 - As mentioned in the overview, this method was less about adding functionality and more about cleaning up the code structure; the final iteration will focus on maintaining the structure and cleanliness while significantly improving functionality
 - To begin, we altered our runDNACompare.java class to remove unnecessary static declarations, condense classes, and improve general structure
@@ -143,6 +147,7 @@ The second iteration primarily focused on revising errors found during the first
 - This involves adding more complex analysis modules, being able to call or turn off certain analysis functions, and using an API to compare output results
 
 ### Generating a Script 
+- We have a preliminary script working; the details are listed below in the __Run Commands__ section, however, we are aiming to develop a more comprehensive script for the following iteration
 - We want to finalize our script for the coming iteration; the script will be able to run the program while taking in a file as the input
 - We also are experimenting with the idea of being able to call certain analysis functions based on the arguments provided to the scripts
 
@@ -175,6 +180,10 @@ The second iteration primarily focused on revising errors found during the first
 
 # Run Commands
 
+### Overview
+
+For this section, you must be in the __src__ folder. You can enter this folder from the main project folder by using __cd src__. Once done, you can either follow the directions to compile the code below or call the script based on the directions in the __Script__ section. Since we are still error handling the script, if there are any errors in the script, please follow the __Directions__ and __List of Commands__ sections below as an alternative.
+
 ### Directions
 - Open a command prompt with the appropriate Java, Git, and OS versions
 - Once you have cloned the repository, ensure you are on the main branch (default)
@@ -188,3 +197,7 @@ The second iteration primarily focused on revising errors found during the first
 - Compare same DNA sequences: __java compareDNA.runCompareDNA testFiles/sameRandomDNASequences.txt__
 - Compare drastically different DNA sequences: __java compareDNA.runCompareDNA testFiles/differentRandomDNASequences.txt__
 - Non-DNA sequences (throws DNA validation exception): __java compareDNA.runCompareDNA testFiles/notDNASequences.txt__
+
+### Script
+- Either you can run the commands above, or you can enter the __src__ via __cd src__ and call the __runCompareDNA.sh__ script with the appropriate filename
+- For example, you can call __bash__ and then __runCompareDNA.sh testFiles/surpriseDNASequences.txt__
