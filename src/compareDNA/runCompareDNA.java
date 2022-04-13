@@ -23,60 +23,60 @@ import compareDNA.readDNAInput;
 
 public class runCompareDNA {
 	
-	public boolean validateInputDNASequences(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
-		int dnaStrandIndex = 1;
-		boolean dnaStrandError = false;
-		System.out.println("Evaluate Inputed DNA Sequences");
-		for (String dnaSequence : dnaSequencesArray) {
-			DNAstrand dnaInputValidation;
-			dnaInputValidation = new DNAstrand(dnaSequence);
-			boolean isDNAValid = dnaInputValidation.validateDNAinput();
-			if (isDNAValid) {
-				System.out.printf("DNA Sequence %d is Valid \n", dnaStrandIndex);
-			}
-			else {
-				System.out.printf("DNA Sequence %d is Not Valid. Please check that the inputed sequence is DNA. \n", dnaStrandIndex);
-				dnaStrandError = true;
-			}
-			dnaStrandIndex++;
-		}
-		return dnaStrandError;
-	}
+//	public boolean validateInputDNASequences(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
+//		int dnaStrandIndex = 1;
+//		boolean dnaStrandError = false;
+//		System.out.println("Evaluate Inputed DNA Sequences");
+//		for (String dnaSequence : dnaSequencesArray) {
+//			DNAstrand dnaInputValidation;
+//			dnaInputValidation = new DNAstrand(dnaSequence);
+//			boolean isDNAValid = dnaInputValidation.validateDNAinput();
+//			if (isDNAValid) {
+//				System.out.printf("DNA Sequence %d is Valid \n", dnaStrandIndex);
+//			}
+//			else {
+//				System.out.printf("DNA Sequence %d is Not Valid. Please check that the inputed sequence is DNA. \n", dnaStrandIndex);
+//				dnaStrandError = true;
+//			}
+//			dnaStrandIndex++;
+//		}
+//		return dnaStrandError;
+//	}
 	
-	public List<List<Double>> computeDNAStatistics(boolean dnaStrandError, ArrayList<String> dnaSequencesArray) throws Exception {
-		System.out.println("Compute DNA Sequence Length Nucleotide Composition");
-		List<List<Double>> nucleotideCompositionsList = new ArrayList<>();
-		
-		int dnaStrandIndex = 1;
-		if (!dnaStrandError) {
-			for (String dnaSequence : dnaSequencesArray) {
-				DNAstrand dnaStatistics;
-				dnaStatistics = new DNAstrand(dnaSequence);				
-				List<Double> nucleotideCompositions = new ArrayList<>();
-				
-				System.out.printf("DNA Sequence %d Length: %d \n", dnaStrandIndex, dnaStatistics.lengthDNA);
-				double percentageA = dnaStatistics.percentageA;
-				double percentageT = dnaStatistics.percentageT;
-				double percentageC = dnaStatistics.percentageC;
-				double percentageG = dnaStatistics.percentageG;
-				System.out.printf("DNA Sequence %d Nucleotide Composition: A: %f | T: %f | C: %f | G: %f  \n", dnaStrandIndex, percentageA, percentageT, percentageC, percentageG);
-				dnaStrandIndex++;
-
-				nucleotideCompositions.add(percentageA);
-				nucleotideCompositions.add(percentageT);
-				nucleotideCompositions.add(percentageC);
-				nucleotideCompositions.add(percentageG);
-				
-				nucleotideCompositionsList.add(nucleotideCompositions);
-			}
-			
-		}
-		else {
-			throw new Exception("There is an error in the provided DNA sequences. Please review the input files prior to conducting transcription.");
-		}
-		
-		return nucleotideCompositionsList;
-	}
+//	public List<List<Double>> computeDNAStatistics(boolean dnaStrandError, ArrayList<String> dnaSequencesArray) throws Exception {
+//		System.out.println("Compute DNA Sequence Length Nucleotide Composition");
+//		List<List<Double>> nucleotideCompositionsList = new ArrayList<>();
+//		
+//		int dnaStrandIndex = 1;
+//		if (!dnaStrandError) {
+//			for (String dnaSequence : dnaSequencesArray) {
+//				DNAstrand dnaStatistics;
+//				dnaStatistics = new DNAstrand(dnaSequence);				
+//				List<Double> nucleotideCompositions = new ArrayList<>();
+//				
+//				System.out.printf("DNA Sequence %d Length: %d \n", dnaStrandIndex, dnaStatistics.lengthDNA);
+//				double percentageA = dnaStatistics.percentageA;
+//				double percentageT = dnaStatistics.percentageT;
+//				double percentageC = dnaStatistics.percentageC;
+//				double percentageG = dnaStatistics.percentageG;
+//				System.out.printf("DNA Sequence %d Nucleotide Composition: A: %f | T: %f | C: %f | G: %f  \n", dnaStrandIndex, percentageA, percentageT, percentageC, percentageG);
+//				dnaStrandIndex++;
+//
+//				nucleotideCompositions.add(percentageA);
+//				nucleotideCompositions.add(percentageT);
+//				nucleotideCompositions.add(percentageC);
+//				nucleotideCompositions.add(percentageG);
+//				
+//				nucleotideCompositionsList.add(nucleotideCompositions);
+//			}
+//			
+//		}
+//		else {
+//			throw new Exception("There is an error in the provided DNA sequences. Please review the input files prior to conducting transcription.");
+//		}
+//		
+//		return nucleotideCompositionsList;
+//	}
 	
 	
 	public ArrayList<String> conductTranscription(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
@@ -152,7 +152,7 @@ public class runCompareDNA {
 		ArrayList<String> dnaSequencesArray = readDNAInput.readDNAInputToArray(args[0]);
 		
 		//output provided dna sequences
-		int dnaStrandIndex = 1; 
+		int dnaStrandIndex = 0; 
 		System.out.println("Provided DNA Sequences");
 		for (String dnaSequence : dnaSequencesArray) {
 			System.out.printf("DNA Sequence %d: %s \n", dnaStrandIndex, dnaSequence);
@@ -160,14 +160,17 @@ public class runCompareDNA {
 		}
 		System.out.println("\n");
 		
-		//dna input validation
-		boolean dnaStrandError = validateInputDNASequences(dnaSequencesArray);
-		System.out.println("\n");
+		//validate dna input and compute dna statistics
+		DNAstrand dnaInputValidation = new DNAstrand(dnaSequencesArray);
 		
-		//compute dna statistics
-		List<List<Double>> dnaStatisticsList = computeDNAStatistics(dnaStrandError, dnaSequencesArray);
-		System.out.println("\n");
-		
+//		//dna input validation
+//		boolean dnaStrandError = dnaInputValidation(dnaSequencesArray);
+//		System.out.println("\n");
+//		
+//		//compute dna statistics
+//		List<List<Double>> dnaStatisticsList = computeDNAStatistics(dnaStrandError, dnaSequencesArray);
+//		System.out.println("\n");
+//		
 		//transcription
 		ArrayList<String> mRNASequencesArray = conductTranscription(dnaSequencesArray);
 		System.out.println("\n");
