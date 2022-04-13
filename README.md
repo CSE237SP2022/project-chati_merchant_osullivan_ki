@@ -1,15 +1,21 @@
-# project-chati_merchant_osullivan_ki
-### project-chati_merchant_osullivan_ki created by GitHub Classroom
-This project takes a set of DNA strands - a sequence of nucleotide base pairs represented by A,T,C, and G - and identifies pairwise differences between 
-the nucleotide bases from each DNA strand. We can compare deletions and insertions within the two DNA strands to identify points of difference and overall similarities.
+# The DNA Compare-Inator
+
+The program takes a set of DNA strands - a sequence of nucleotide base pairs represented by A,T,C, and G - and first converts them to mRNA sequences via the process of transcription. Next, the mRNA sequences are converted to amino acids via the process of transcription. This involves splitting the mRNA sequences into subsets of 3 nucleotide base pairs (codons), which map to amino acid residues that form peptide chains. Finally, the two output peptide chains are compared based on the degree of overlapping amino acid residues. 
+
+Directions to run the program are provided at the bottom along with a list of commands. 
+
+And yes, this program was named after the world famous scientist and inventor [Dr. Heinz Doofenshmirtz](https://en.wikipedia.org/wiki/Dr._Heinz_Doofenshmirtz). His other ingenous -inators can be found [here](https://phineasandferb.fandom.com/wiki/List_of_Doofenshmirtz%27s_schemes_and_inventions)
+
+##### Project Github Names
+###### project-chati_merchant_osullivan_ki
+###### project-chati_merchant_osullivan_ki created by GitHub Classroom
 
 # Iteration 1 | 03/30/2022
 
 ## Stories Completed
 
-## Overview
-
 ### Command Line Initiation
+- The program can be initiated from the command line with the set of commands provided at the bottom of this document
 
 ### Read Sample DNA Sequences from Text File
 - The program is able to take in a text file that contains 2 DNA sequences; one for each line
@@ -40,25 +46,85 @@ the nucleotide bases from each DNA strand. We can compare deletions and insertio
 - Once the mRNA sequences have been translated, pairwise similarities can be analyzed
 
 ### Pairwise Amino Acid Comparison
+- For now, the amino acid at each index for the two peptide chains is compared and the overall similarity is reported
+- The percentage similarity will account for insertions and deletions in future iterations
 
 ### Unit Tests for Validating Functionality
+- Unit tests were deeveloped to test reading in DNA sequences, testing the functionality of transcription and translation, and evaluating outputs
+- Further unit tests to test more robust performance will be developed during the second iteration
 
 ## Stories to Complete for Iteration 2
 
 ### Expand Scope of DNA Analysis 
+- During iteration 2, we are hoping to improve the realm of statistics computed on the DNA sequences
+- This includes comparing it to a database of sequences and identifying similar substrings, identifying any repeating patterns of nucleotides, and identifying segments of repeated nucleotides (possibly indicating regulatory elements)
 
 ### Parse DNA Sequences with Lengths Not Divisible by 3
+- The program should take in DNA sequences that are not of lengths divisible by 3
+- We are aiming to account for the overhang by either deleting it or implementing it in the insertion and deletion model for the amino acid pairwise comparison
 
 ### Start and Stop Translation at Appropriate Codons
+- Certain codons initiate and terminate the process of translation
+- We are aiming to parse through the DNA sequence and identify where the start and stop codons are and then only translate the segements in between
 
 ### Identify Sources of Insertions and Deletions Between DNA Sequences and Amino Acid Peptides
+- This would involve using better models to compute the probability of an insertion or deletion (hidden markov models may be the most useful in this area)
+- We would want to say that certain residues have either been added or deleted, and maybe tie that to downstream issues in folding
 
-## Errors
+### Identify Simple Folding Patterns Based on Amino Acid Residues
+- Since protein folding is one of the most complex problems in computing, we are aiming to simplify our folding pattern indicator to certain residues that indicate bridges or hallmark structures
+- One such being cysteine residues forming a bridge if distributed far enough
+- Similarly, we can detail properties of the protein based on the amino acid resides: more polar residues may indicate a channel, more neutral residues with certain highly reactive residues may indicate an enzyme, etc. 
+
+### Expand Set of Test Files
+- We are hoping to expand on the set of test files we use, including real genomic segments from NCBI GEO
+- Using real genomic data may give us better grounds for testing the power and efficiency of our program
+
+## Errors and Challenges
 
 ### File Not Found Error
+- The first main error incurred involved the importation of text files corresponding to the amino acid dictionary and the DNA sequences
+- Originally, we incurred a file not found error, however, we resolved this by providing a more direct path to the file to avoid an ambiguity 
 
 ### JUnit Module Export Error
+- The JUnit tests would not true due to an error in the .classpath file and the module-info.java files
+- We imported the necessary requirements into module-info.java and exported the test package to JUnit 
+- We then changed the .classpath; this was done automiatically by the IDE
 
 ### DNA Sequence String Indexing Array while During Translation
+- When finding subsets of length 3 in the DNA sequences, we realized that sometimes, if the lenght was not divisble by three, there would be overhang string subsets that were less than length 2
+- Each codon needs to be specifically 3 nucleotide base pairs in order to be read, however, codons are read based on certain start and stop signals
+- Since we did not account for this, we included a temporary fix by making the test DNA sequences have lengths divisible by 3
+- A more robust correction would involve checking the overhang and ommitting if necessary
 
-## Run Commands
+### Insertion and Deletions in Peptide Chains
+- One challenge we are still working on is properly discovering insertions and deletions between two peptide chains
+- Since insertions and deletions can cause difference in lengths of the chains and may cause index changes, more robust statistical models need to be used
+
+# Iteration 2 | 04/13/2022
+
+## Iteration 2 Overview
+
+The second iteration primarily focused on revising errors found during the first iteration while improving the structure of the code, inclduing cleanliness and conciseness. We also updated the unit tests - they were made shorter and each unit test now corresponds with a method or functionality of our program. Along with improving the code structure, we also implemented added functionality to our program. These updates can be found below. In addition, the a set of commands can be found at the bottom of this document. 
+
+## Stories Completed
+
+## Stories to Complete for Iteration 3
+
+## Errors and Challenges
+
+# Run Commands
+
+### Directions
+- Open a command prompt with the appropriate Java, Git, and OS versions
+- Once you have cloned the repository, ensure you are on the main branch (default)
+- Navigate into the src directory with the command: __cd src__; your command line should look something like: __...\project-chati_merchant_osullivan_ki\src>__
+- From the src directory, if the program has not compilied, first run: __javac compareDNA/runCompareDNA.java__
+- To then run the program once in src, call the program on a test file in the testFiles folder: __java compareDNA.runCompareDNA testFiles/{testFileName.txt}__
+
+### List of Commands (Call in src Folder)
+- Compile program prior to running: __javac compareDNA/runCompareDNA.java__
+- Run the following to see the true meaning of life: __java compareDNA.runCompareDNA testFiles/surpriseDNASequences.txt__
+- Compare same DNA sequences: __java compareDNA.runCompareDNA testFiles/sameRandomDNASequences.txt__
+- Compare drastically different DNA sequences: __java compareDNA.runCompareDNA testFiles/differentRandomDNASequences.txt__
+- Non-DNA sequences (throws DNA validation exception): __java compareDNA.runCompareDNA testFiles/notDNASequences.txt__
