@@ -22,7 +22,7 @@ import compareDNA.DNAstrand;
 
 public class runCompareDNA {
 	
-	public static ArrayList<String> readDNAInputToArray(String filePath) throws FileNotFoundException {
+	public ArrayList<String> readDNAInputToArray(String filePath) throws FileNotFoundException {
 		ArrayList<String> dnaSequencesArray = new ArrayList<String>(); //create array list for the dna sequences
 		Scanner dnaSequenceInputFile = new Scanner(new File(filePath)); //read the sequences through the command line
 		while (dnaSequenceInputFile.hasNextLine()) {
@@ -32,7 +32,7 @@ public class runCompareDNA {
 		return dnaSequencesArray;
 	}
 	
-	public static boolean validateInputDNASequences(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
+	public boolean validateInputDNASequences(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
 		int dnaStrandIndex = 1;
 		boolean dnaStrandError = false;
 		System.out.println("Evaluate Inputed DNA Sequences");
@@ -52,7 +52,7 @@ public class runCompareDNA {
 		return dnaStrandError;
 	}
 	
-	public static List<List<Double>> computeDNAStatistics(boolean dnaStrandError, ArrayList<String> dnaSequencesArray) throws Exception {
+	public List<List<Double>> computeDNAStatistics(boolean dnaStrandError, ArrayList<String> dnaSequencesArray) throws Exception {
 		System.out.println("Compute DNA Sequence Length Nucleotide Composition");
 		List<List<Double>> nucleotideCompositionsList = new ArrayList<>();
 		
@@ -88,7 +88,7 @@ public class runCompareDNA {
 	}
 	
 	
-	public static ArrayList<String> conductTranscription(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
+	public ArrayList<String> conductTranscription(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
 		ArrayList<String> mRNASequencesArray = new ArrayList<>();
 		int dnaStrandIndex = 1;
 		System.out.println("Conduct Transcription to mRNA");
@@ -106,7 +106,7 @@ public class runCompareDNA {
 		return mRNASequencesArray;
 	}
 	
-	public static boolean validateTranscriptionResults(ArrayList<String> mRNASequencesArray) throws FileNotFoundException {
+	public boolean validateTranscriptionResults(ArrayList<String> mRNASequencesArray) throws FileNotFoundException {
 		int dnaStrandIndex = 1;
 		boolean transcriptionOutputError = false;
 		
@@ -132,7 +132,7 @@ public class runCompareDNA {
 		return transcriptionOutputError;
 	}
 	
-	public static ArrayList<String> conductTranslation(boolean transcriptionOutputError, ArrayList<String> mRNASequencesArray) throws Exception {
+	public ArrayList<String> conductTranslation(boolean transcriptionOutputError, ArrayList<String> mRNASequencesArray) throws Exception {
 		ArrayList<String> aminoAcidSequencesArray;
 		if (!transcriptionOutputError) {
 			int dnaStrandIndex = 1;			
