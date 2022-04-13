@@ -19,21 +19,27 @@ import java.util.Scanner;
 
 //import classes and functions
 import compareDNA.runCompareDNA;
+import compareDNA.readDNAInput;
+import compareDNA.DNAstrand;
+import compareDNA.transcription;
 import compareDNA.validateTranscriptionOutputs;
 import compareDNA.translation;
-import compareDNA.DNAstrand;
+
 
 public class compareDNATest {
 	
-
+	//readDNAInput
+	
+	//readDNAInputToArray method: check if sequences are being read in properly from the text file inputs
 	@Test
 	public static void testReadDNASequences() throws FileNotFoundException {
 		
 //		String[] dnaSequencesFilePathArray = {"testFiles/sameRandomDNASequences.txt"};
 		
 		//read in file path and collect output array containing dna sequences
-		ArrayList<String> dnaSequencesArray = runCompareDNA.readDNAInputToArray("src/testFiles/sameRandomDNASequences.txt");
-		
+		readDNAInput readInput = new readDNAInput();
+		ArrayList<String> dnaSequencesArray = readDNAInput.readDNAInputToArray("src/testFiles/sameRandomDNASequences.txt");
+				
 		//manually store dna strands from the inputed test file
 		String trueDNASequence1 = "ATGCGATCGATCTAGATCGATATGCGATTCGATGCTTATATATAAAAGCGCTATAGCATCGATCGATCGATCAGG";
 		String trueDNASequence2 = "ATGCGATCGATCTAGATCGATATGCGATTCGATGCTTATATATAAAAGCGCTATAGCATCGATCGATCGATCAGG";
@@ -44,7 +50,6 @@ public class compareDNATest {
 		//check manually that the two strands being read in correspond to the dna sequences in the file
 		assertTrue("The inputed first DNA sequence does not match the true first DNA sequence", dnaSequencesArray.get(0).equals(trueDNASequence1));
 		assertTrue("The inputed second DNA sequence does not match the true second DNA sequence", dnaSequencesArray.get(1).equals(trueDNASequence2));
-		
 	}
 	
 	@Test
