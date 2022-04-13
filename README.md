@@ -101,7 +101,19 @@ And yes, this program was named after the world famous scientist and inventor [D
 - One challenge we are still working on is properly discovering insertions and deletions between two peptide chains
 - Since insertions and deletions can cause difference in lengths of the chains and may cause index changes, more robust statistical models need to be used
 
-## Run Commands
+# Iteration 2 | 04/13/2022
+
+## Iteration 2 Overview
+
+The second iteration primarily focused on revising errors found during the first iteration while improving the structure of the code, inclduing cleanliness and conciseness. We also updated the unit tests - they were made shorter and each unit test now corresponds with a method or functionality of our program. Along with improving the code structure, we also implemented added functionality to our program. These updates can be found below. In addition, the a set of commands can be found at the bottom of this document. 
+
+## Stories Completed
+
+## Stories to Complete for Iteration 3
+
+## Errors and Challenges
+
+# Run Commands
 
 ### Directions
 - Open a command prompt with the appropriate Java, Git, and OS versions
