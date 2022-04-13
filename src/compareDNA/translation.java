@@ -15,7 +15,9 @@ import java.util.Set;
 
 public class translation {
 	
-    public ArrayList<String> translater(ArrayList<String> dnaSequencesArray, Boolean isRNAValid) throws Exception {
+//	private String aminoAcidDictionaryPath = "compareDNA/aminoAcidsDictionary.txt";
+	
+    public ArrayList<String> translater(ArrayList<String> dnaSequencesArray, Boolean isRNAValid, String aminoAcidDictionaryPath) throws Exception {
         
     	if (isRNAValid) {
     		
@@ -24,7 +26,7 @@ public class translation {
     		int dnaStrandIndex = 0;
     		
     		List<Map.Entry<String, String>> codonAminoAcidMap = new ArrayList<>();
-            Scanner aminoAcidsDictionary = new Scanner(new File("src/compareDNA/aminoAcidsDictionary.txt")); // CHANGE this to
+            Scanner aminoAcidsDictionary = new Scanner(new File(aminoAcidDictionaryPath)); // CHANGE this to
                                                                                                          // run from src
             while (aminoAcidsDictionary.hasNextLine()) {
                 String codonAminoAcidMapping = aminoAcidsDictionary.nextLine(); // store each next dna sequence in the array

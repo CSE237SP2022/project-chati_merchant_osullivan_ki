@@ -172,7 +172,8 @@ public class compareDNATest {
 		
 		//conduct translation on sample rna sequences
 		translation translationModule = new translation();
-		ArrayList<String> aminoAcidSequences = translationModule.translater(sampleRNASequencesArray, isRNAValid);
+		String aminoAcidDictionaryPath = "src/compareDNA/aminoAcidsDictionary.txt";
+		ArrayList<String> aminoAcidSequences = translationModule.translater(sampleRNASequencesArray, isRNAValid, aminoAcidDictionaryPath);
 	
 		//check that translation worked properly
 		assertTrue("The mRNA sequences were not properly translated to amino acids.", samplePeptideSequencesArray.equals(aminoAcidSequences));
