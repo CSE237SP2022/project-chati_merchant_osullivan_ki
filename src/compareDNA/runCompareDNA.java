@@ -29,18 +29,9 @@ public class runCompareDNA {
 		
 		System.out.println("\n");
 		
-		//setup
+		//read and print dna sequences
 		readDNAInput readInput = new readDNAInput();
 		ArrayList<String> dnaSequencesArray = readDNAInput.readDNAInputToArray(args[0]);
-		
-		//output provided dna sequences
-		int dnaStrandIndex = 0; 
-		System.out.println("Provided DNA Sequences");
-		for (String dnaSequence : dnaSequencesArray) {
-			System.out.printf("DNA Sequence %d: %s \n", dnaStrandIndex, dnaSequence);
-			dnaStrandIndex++;
-		}
-		
 		System.out.println("\n");
 		
 		//validate dna input and compute dna statistics
