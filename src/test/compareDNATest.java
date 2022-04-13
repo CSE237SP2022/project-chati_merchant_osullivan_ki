@@ -33,12 +33,14 @@ public class compareDNATest {
 	private String sampleDNASequence;
 	private String invalidDNASequence;
 	private String sampleRNASequence;
+	private String samplePeptideChain;
 	private ArrayList<String> sampleDNASequencesArray;
 	private ArrayList<String> invalidDNASequencesArray;
 	private ArrayList<Integer> sampleDNALengthsArray;
 	private List<Double> sampleDNASequenceStatistics;
 	private List<List<Double>> sampleDNAStatisticsArray;
 	private ArrayList<String> sampleRNASequencesArray;
+	private ArrayList<String> samplePeptideSequencesArray;
 	
 	//setup - create a set of sample dna and mrna sequences that can be used repeatedly for testing purposes and predefine outputs from methods we are testing
 	@Before
@@ -46,6 +48,7 @@ public class compareDNATest {
 		sampleDNASequence = "AAAAAATTTTTTCCCCCCGGGGGG";
 		invalidDNASequence = "AAAAAATSDFGSTTGGGGGSDFCD";
 		sampleRNASequence = "UUUUUUAAAAAAGGGGGGCCCCCC";
+		samplePeptideChain = "FFKKGGPP";
 		
 		//create array for sample and invalid dna sequences
 		sampleDNASequencesArray = new ArrayList<String>(Arrays.asList(sampleDNASequence,sampleDNASequence));
@@ -60,6 +63,10 @@ public class compareDNATest {
 		
 		//create array for mrna sequences generated through transcription
 		sampleRNASequencesArray = new ArrayList<String>(Arrays.asList(sampleRNASequence,sampleRNASequence));
+		
+		//create sample translation output
+		samplePeptideSequencesArray = new ArrayList<String>(Arrays.asList(samplePeptideChain,samplePeptideChain));
+
 	}
 	
 	
@@ -147,13 +154,29 @@ public class compareDNATest {
 	@Test
 	public void testValidateTranscriptionOuputs() throws Exception {
 		
+		//run transcription validation on rna and dna sequences
+		validateTranscriptionOutputs transcriptionValidation = new validateTranscriptionOutputs();
+		boolean correctRNAValidationOutput = transcriptionValidation.validator(sampleRNASequencesArray);
+		boolean incorrectRNAValidationOutput = transcriptionValidation.validator(sampleDNASequencesArray);
 		
+		//check that incorrect mrna sequences can be properly detected
+		assertTrue("The DNA sequences were properly transcribed to mRNA.", correctRNAValidationOutput == true); 
+		assertTrue("The DNA sequences were not properly transcribed to mRNA.", incorrectRNAValidationOutput == false);
 	} 
 	
 	@Test
 	public void testConductTranslation() throws Exception {
 		
+		//assume valid mrna
+		boolean isRNAValid = true;
 		
+		//conduct translation on sample rna sequences
+		translation translationModule = new translation();
+		ArrayList<String> aminoAcidSequences = translationModule.translater(sampleRNASequencesArray, isRNAValid);
+	
+		//check that translation worked properly
+		assertTrue("The mRNA sequences were not properly translated to amino acids.", samplePeptideSequencesArray.equals(aminoAcidSequences));
+
 	} 
 
 
