@@ -180,5 +180,10 @@ public class compareDNATest {
 
 	} 
 
+	@Test 
+	public void testShortDNASequence() throws Exception {
+
+	}
+
 
 }
