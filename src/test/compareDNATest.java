@@ -182,7 +182,14 @@ public class compareDNATest {
 
 	@Test 
 	public void testShortDNASequence() throws Exception {
+		//Setup a DNA strand sequence
+		String DNASequenceTest = "ATCGACGACTGATCGATCGTACGTACGTA";
 
+		//Create a smaller strand from the larger strand
+		String subString = "CGACGAC";
+
+		//Check that the method found the location in the correct spot.
+		assertTrue("The location of the substring was not found", locationDNA(DNASequenceTest, subString).equals(2));
 	}
 
 
