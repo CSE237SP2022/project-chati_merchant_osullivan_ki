@@ -25,6 +25,7 @@ import compareDNA.DNAstrand;
 import compareDNA.transcription;
 import compareDNA.validateTranscriptionOutputs;
 import compareDNA.translation;
+import compareDNA.shortDNASequence;
 
 
 public class compareDNATest {
