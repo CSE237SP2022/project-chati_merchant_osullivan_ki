@@ -19,8 +19,8 @@ public class startStopCodons {
 
     public String shortenedSequence(String x) {
         x = findStart(x);
-        for (int i = 0; i < x.length() - 2; i++) {
-            if (x.charAt(i) == 'U') {
+        for (int i = 0; i < x.length() - 2; i=i+3) {//Goes through every 3 characters  
+            if (x.charAt(i) == 'U') { //Checks through the characters
                 if (x.charAt(i + 1) == 'A') {
                     if (x.charAt(i + 2) == 'A' || x.charAt(i + 2) == 'G') {
                         x = x.substring(0, i + 2);
