@@ -178,6 +178,21 @@ The second iteration primarily focused on revising errors found during the first
 - We were able to detect mutations in the middle of sequences, however, we are still handing edge cases, such as detecting mutations at the beginning or end of a sequence
 - This is particularly tough for insertions and deletions because you have to shift the frame or view of the DNA sequence temporarily in order to understand how deep the mutation is
 
+# Iteration 3
+
+## Stories Completed
+
+### Overview
+- This iteration largely focused on cleaning up the code while adding smaller functional pieces that were well tested and structured properly. 
+- We first wrote unit tests for all of the methods that are being implemented; this means that every method that exists in the print statements when the program is called through the script has a unit test
+- Next, we implemented a method to check whether certain substrings or smaller gene sequences exist in a larger sequence; this helps validate whether certain genes exist in a larger DNA sequence which could indicate functionality
+- 
+
+### Unit Testing
+
+## Challenges & Errors
+
+
 # Run Commands
 
 ### Overview

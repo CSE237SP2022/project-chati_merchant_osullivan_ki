@@ -27,6 +27,7 @@ import compareDNA.DNAstrand;
 import compareDNA.transcription;
 import compareDNA.validateTranscriptionOutputs;
 import compareDNA.translation;
+import compareDNA.shortDNASequence;
 
 
 public class compareDNATest {
@@ -193,6 +194,22 @@ public class compareDNATest {
 		//check that the longest common substring was found
 		assertTrue("The most common substring was not ATCG", result.equals("ATCG"));
 		
+	}
+
+	@Test 
+	public void testShortDNASequence() throws Exception {
+		//Setup a DNA strand sequence
+		String DNASequenceTest = "ATCGACGACTGATCGATCGTACGTACGTA";
+
+		//Create a smaller strand from the larger strand
+		String subString = "CGACGAC";
+		
+		//create instance of method
+		shortDNASequence findDNASubstring = new shortDNASequence();
+		
+
+		//Check that the method found the location in the correct spot.
+		assertTrue("The location of the substring was not found", shortDNASequence.locationDNA(DNASequenceTest, subString) == 2);
 	}
 
 }
