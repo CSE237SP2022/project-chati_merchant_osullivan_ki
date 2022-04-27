@@ -26,6 +26,8 @@ import compareDNA.transcription;
 import compareDNA.validateTranscriptionOutputs;
 import compareDNA.translation;
 import compareDNA.shortDNASequence;
+import compareDNA.startStopCodons;
+import compareDNA.pairwiseComparison;
 
 
 public class compareDNATest {
@@ -42,6 +44,11 @@ public class compareDNATest {
 	private List<List<Double>> sampleDNAStatisticsArray;
 	private ArrayList<String> sampleRNASequencesArray;
 	private ArrayList<String> samplePeptideSequencesArray;
+	private String sampleRNASequenceWithStartStop;
+	private String[] similarAminoAcidsOne;
+	private String[] similarAminoAcidsTwo;
+	private double similarityPercent;
+	
 	
 	//setup - create a set of sample dna and mrna sequences that can be used repeatedly for testing purposes and predefine outputs from methods we are testing
 	@Before
@@ -67,6 +74,13 @@ public class compareDNATest {
 		
 		//create sample translation output
 		samplePeptideSequencesArray = new ArrayList<String>(Arrays.asList(samplePeptideChain,samplePeptideChain));
+		
+		//define variables for similarity checker
+		sampleRNASequenceWithStartStop = "AGAAAAGCUCGAUGCUAGUCGAUAGCGUAGUCGCCUGACACUGACUAGCUAGUC";
+		similarAminoAcidsOne = new String[]{"Valine", "Leucine", "Serine", "Proline", "Valine"};
+		similarAminoAcidsTwo = new String[]{"Valine", "Apartic Acid", "Leucine", "Proline", "Arginine"};
+		similarityPercent = .4;
+
 
 	}
 	
@@ -195,6 +209,42 @@ public class compareDNATest {
 
 		//Check that the method found the location in the correct spot.
 		assertTrue("The location of the substring was not found", shortDNASequence.locationDNA(DNASequenceTest, subString) == 2);
+	}
+	
+
+	@Test
+	public void testFindStart() throws Exception {		
+
+		startStopCodons findStartCodon = new startStopCodons();
+		String testRNASequenceStart  = findStartCodon.findStart(sampleRNASequenceWithStartStop);
+							
+		assertTrue("The sequence begins with a start codon", testRNASequenceStart.substring(0,3).equals("AUG"));
+		}
+
+	@Test
+	public void testShortenedSequence() throws Exception {		
+
+		startStopCodons shortenSequence = new startStopCodons();
+		String testRNASequenceStop  = shortenSequence.shortenedSequence(sampleRNASequenceWithStartStop);
+		
+		//create an array with the stop codons
+		ArrayList<String> stopCodons = new ArrayList<>();
+		stopCodons.add("UAA");
+		stopCodons.add("UGA");
+		stopCodons.add("UAG");
+		
+		//take last three nucleotides
+		testRNASequenceStop = testRNASequenceStop.substring(testRNASequenceStop.length()-3);
+		
+		assertTrue("The sequence ends with a stop codon", stopCodons.contains(testRNASequenceStop));
+	}
+
+	@Test
+	public void testSimilarityChecker() throws Exception {	
+		
+		pairwiseComparison pariwiseAA = new pairwiseComparison();
+		double testSimilarityPercent  = pariwiseAA.similarityChecker(similarAminoAcidsOne,similarAminoAcidsTwo);
+		assertTrue("The similarity percentages are not equal, please check the method.", testSimilarityPercent == similarityPercent);
 	}
 
 

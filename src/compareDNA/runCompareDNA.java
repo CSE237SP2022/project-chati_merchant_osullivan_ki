@@ -53,8 +53,6 @@ public class runCompareDNA {
 		translation translationModule = new translation();
 		String aminoAcidDictionaryPath = "compareDNA/aminoAcidsDictionary.txt";
 		ArrayList<String> aminoAcidSequencesArray = translationModule.translater(mRNASequencesArray, isRNAValid, aminoAcidDictionaryPath);
-		
-		
 
 	}
 	

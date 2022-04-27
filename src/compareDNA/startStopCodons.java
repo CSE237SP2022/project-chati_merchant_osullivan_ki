@@ -23,12 +23,12 @@ public class startStopCodons {
             if (x.charAt(i) == 'U') { //Checks through the characters
                 if (x.charAt(i + 1) == 'A') {
                     if (x.charAt(i + 2) == 'A' || x.charAt(i + 2) == 'G') {
-                        x = x.substring(0, i + 2);
+                        x = x.substring(0, i + 3);
                     }
                 }
                 if (x.charAt(i + 1) == 'G') {
                     if (x.charAt(i + 2) == 'A') {
-                        x = x.substring(0, i + 2);
+                        x = x.substring(0, i + 3);
                     }
                 }
             }
