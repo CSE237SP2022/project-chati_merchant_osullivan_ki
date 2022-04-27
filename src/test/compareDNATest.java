@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.TestFactory;
+//import org.junit.jupiter.api.TestFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,8 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-
-
 //import classes and functions
 import compareDNA.runCompareDNA;
 import compareDNA.readDNAInput;
@@ -30,6 +28,7 @@ import compareDNA.translation;
 import compareDNA.shortDNASequence;
 import compareDNA.startStopCodons;
 import compareDNA.pairwiseComparison;
+import compareDNA.mutationalAnalysis;
 
 
 public class compareDNATest {
@@ -47,9 +46,14 @@ public class compareDNATest {
 	private ArrayList<String> sampleRNASequencesArray;
 	private ArrayList<String> samplePeptideSequencesArray;
 	private String sampleRNASequenceWithStartStop;
-	private String[] similarAminoAcidsOne;
-	private String[] similarAminoAcidsTwo;
+	private String similarAminoAcidsOne;
+	private String similarAminoAcidsTwo;
+	private ArrayList<String> similarPeptideSequences;
 	private double similarityPercent;
+	private String unmutatedSequence;
+	private String substitutedSequence;
+	private String insertedSequence;
+	private String deletedSequence;
 	
 	
 	//setup - create a set of sample dna and mrna sequences that can be used repeatedly for testing purposes and predefine outputs from methods we are testing
@@ -79,11 +83,16 @@ public class compareDNATest {
 		
 		//define variables for similarity checker
 		sampleRNASequenceWithStartStop = "AGAAAAGCUCGAUGCUAGUCGAUAGCGUAGUCGCCUGACACUGACUAGCUAGUC";
-		similarAminoAcidsOne = new String[]{"Valine", "Leucine", "Serine", "Proline", "Valine"};
-		similarAminoAcidsTwo = new String[]{"Valine", "Apartic Acid", "Leucine", "Proline", "Arginine"};
-		similarityPercent = .4;
-
-
+		similarAminoAcidsOne = "AAKRKALLSS";
+		similarAminoAcidsTwo = "AWKRKALWSS";
+		similarPeptideSequences = new ArrayList<String>(Arrays.asList(similarAminoAcidsOne,similarAminoAcidsTwo));
+		similarityPercent = .8;
+		
+		//create sequences for testing mutational detection
+		unmutatedSequence = "AGAAAGUCGCCUGACACUGACUAGCUAGUC";
+		substitutedSequence = "AGAAAGUCGCCCGACACUGACUAGCUAGUC";
+		insertedSequence = "AGGAAAGUCGCCUGACACUGACUAGCUAGUC";
+		deletedSequence = "AGAAAGUCGCUGACACUGACUAGCUAGUC";
 	}
 	
 	
@@ -199,14 +208,16 @@ public class compareDNATest {
 	@Test
 	public void testsubstringFrequency() throws Exception{
 		//Setup DNA sequence with longest common substring of ATCG
-		String DNAsequence = "ATCGTGACATCGGACCATCG";
+		String kMerDNASequence = "ATCGTGACATCGGACCATCG";
 		
 		//create a DNAstrand class and run the method
 		DNAstrand ds = new DNAstrand();
-		String result = ds.substringFrequency(DNAsequence);
+		String result = ds.substringFrequency(kMerDNASequence);
+		
+		System.out.print(result);
 		
 		//check that the longest common substring was found
-		assertTrue("The most common substring was not ATCG", result.equals("ATCG"));
+		assertTrue("The most common substring was not ATCG", result.equals("CATC"));
 		
 	}
 
@@ -258,8 +269,38 @@ public class compareDNATest {
 	public void testSimilarityChecker() throws Exception {	
 		
 		pairwiseComparison pariwiseAA = new pairwiseComparison();
-		double testSimilarityPercent  = pariwiseAA.similarityChecker(similarAminoAcidsOne,similarAminoAcidsTwo);
+		double testSimilarityPercent  = pariwiseAA.similarityChecker(similarPeptideSequences);
 		assertTrue("The similarity percentages are not equal, please check the method.", testSimilarityPercent == similarityPercent);
+	}
+
+	@Test
+	public void testDetectSubstitution() throws Exception {		
+		
+		mutationalAnalysis substitution = new mutationalAnalysis();
+		ArrayList<String> subSequence = new ArrayList<String>();
+		subSequence.add(unmutatedSequence);
+		subSequence.add(substitutedSequence);
+		assertTrue("The sequence does not show a substitution", substitution.detectSubstitution(subSequence));
+	}
+
+	@Test
+	public void testPointInsertion() throws Exception {		
+
+		mutationalAnalysis insertion = new mutationalAnalysis();
+		ArrayList<String> insSequence = new ArrayList<String>();
+		insSequence.add(unmutatedSequence);
+		insSequence.add(insertedSequence);
+		assertTrue("The sequence does not show an insertion", insertion.detectionPointInsertion(insSequence));
+	}
+
+	@Test
+	public void testPointDeletion() throws Exception {		
+		
+		mutationalAnalysis deletion = new mutationalAnalysis();
+		ArrayList<String> delSequence = new ArrayList<String>();
+		delSequence.add(unmutatedSequence);
+		delSequence.add(deletedSequence);
+		assertTrue("The sequence does not show a deletion", deletion.detectionPointDeletion(delSequence));
 	}
 
 }

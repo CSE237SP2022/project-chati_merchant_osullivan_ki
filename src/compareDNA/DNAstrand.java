@@ -128,22 +128,25 @@ public class DNAstrand {
 
 	}
 	public String substringFrequency(String DNAsequence){
+		
+		System.out.print("Longest Repeating Subsequence for DNA Sequences");
+		
 		String result = DNAsequence.substring(0, 1);
-		String currString;
+		String currString = null;
 		int substringLen = 1;
-		int highestCount = 0;
-		int count = 0;
+		int highestCount = -100;
 		while(substringLen < DNAsequence.length()/2) {
-			for(int x = 0; x <= DNAsequence.length() - substringLen; x++){
-				currString = DNAsequence.substring(x, x+substringLen);
+			for(int x = 0; x < DNAsequence.length() - substringLen; x++){
+				int count = 0;
 				for(int y = 1; y < DNAsequence.length(); y++) {
-					if(x + substringLen >= DNAsequence.length() || y + substringLen >= DNAsequence.length() ) {
+					if(x + substringLen < DNAsequence.length() && y + substringLen < DNAsequence.length() ) {
+						currString = DNAsequence.substring(x, x+substringLen);
 						if(currString.equals(DNAsequence.substring(y, y+substringLen))) {
-							count ++;
+							count++;
 						}
 					}
 				}
-				if(count >= highestCount && currString.length() >= result.length()) {
+				if(count >= highestCount && currString.length() > result.length()) {
 					result = currString;
 					highestCount = count;
 				}
@@ -151,6 +154,8 @@ public class DNAstrand {
 			substringLen++;
 			
 		}
+		
+		System.out.printf("The Longest Repeating Subsequence is %s", result);
 		return result;
 	}
 	
