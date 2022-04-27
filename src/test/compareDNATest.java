@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.TestFactory;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -179,6 +181,10 @@ public class compareDNATest {
 		assertTrue("The mRNA sequences were not properly translated to amino acids.", samplePeptideSequencesArray.equals(aminoAcidSequences));
 
 	} 
-
+	@Test
+	public void testsubstringFrequency() throws Exception{
+		//Setup DNA sequence with longest common substring of ATCG
+		
+	}
 
 }

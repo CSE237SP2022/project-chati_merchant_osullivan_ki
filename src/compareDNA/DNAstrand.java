@@ -127,6 +127,9 @@ public class DNAstrand {
 		return dnaStatisticsArray;
 
 	}
-	
+	public String substringFrequency(String DNAsequence){
+		
+
+	}
 	
 }
