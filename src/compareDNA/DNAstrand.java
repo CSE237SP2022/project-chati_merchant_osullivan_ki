@@ -128,10 +128,27 @@ public class DNAstrand {
 
 	}
 	public String substringFrequency(String DNAsequence){
-		String result;
-		int index = 0;
-		int substringSize = 2;
-		for(int x = 0; x < DNAsequence.length(); x++){
+		String result = DNAsequence.substring(0, 1);
+		String currString;
+		int substringLen = 1;
+		int highestCount = 0;
+		int count = 0;
+		while(substringLen < DNAsequence.length()/2) {
+			for(int x = 0; x <= DNAsequence.length() - substringLen; x++){
+				currString = DNAsequence.substring(x, x+substringLen);
+				for(int y = 1; y < DNAsequence.length(); y++) {
+					if(x + substringLen >= DNAsequence.length() || y + substringLen >= DNAsequence.length() ) {
+						if(currString.equals(DNAsequence.substring(y, y+substringLen))) {
+							count ++;
+						}
+					}
+				}
+				if(count >= highestCount && currString.length() >= result.length()) {
+					result = currString;
+					highestCount = count;
+				}
+			}
+			substringLen++;
 			
 		}
 		return result;

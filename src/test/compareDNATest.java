@@ -184,10 +184,14 @@ public class compareDNATest {
 	@Test
 	public void testsubstringFrequency() throws Exception{
 		//Setup DNA sequence with longest common substring of ATCG
-		String DNAstrand = "ATCGTGACATCGGACCATCG";
-
-		//check that the longest common substring can be found
-		assertTrue("The most common substring was not ATCG", substringFrequency(DNAstrand).equals("ATCG"));
+		String DNAsequence = "ATCGTGACATCGGACCATCG";
+		
+		//create a DNAstrand class and run the method
+		DNAstrand ds = new DNAstrand();
+		String result = ds.substringFrequency(DNAsequence);
+		
+		//check that the longest common substring was found
+		assertTrue("The most common substring was not ATCG", result.equals("ATCG"));
 		
 	}
 
