@@ -186,12 +186,33 @@ The second iteration primarily focused on revising errors found during the first
 - This iteration largely focused on cleaning up the code while adding smaller functional pieces that were well tested and structured properly. 
 - We first wrote unit tests for all of the methods that are being implemented; this means that every method that exists in the print statements when the program is called through the script has a unit test
 - Next, we implemented a method to check whether certain substrings or smaller gene sequences exist in a larger sequence; this helps validate whether certain genes exist in a larger DNA sequence which could indicate functionality
-- 
+- We also implemented a similarity checker for the amino acids
 
 ### Unit Testing
+- We were much more thorough this round and included a unit test for every implemented method
+- We are able to get the unit tests to be functional in all of the methods
+
+### Longest Subsequence
+- We developed a longest subsequence method that finds the longest repeating sequence in a DNA strand
+- This was implemented using a brute force framework, however, dynamic programming instances can also be used to solve this problem
+
+### Amino Acid Similarity Checker
+- Finally, we implemented the similarity checker for the amino acid sequences which compares two sequences and gauges the similarities between them
 
 ## Challenges & Errors
 
+### Indexing Errors
+- Most of the errors this iteration consisted of indexing errors when we were finding the subsequences
+- This largely involved not shifting the frame of reference properly for a DNA sequence
+- Ultimately, we resolved this issue by looking at each conditional statement and making sure that the bounds and conditions were properly set
+
+### Mutation Detection
+- We were also able to get the point mutation detection module working, however, storing the individual modules still poses a challenge
+- This  is because we have to update the indexes manually everytime we find a mutation or remove the mutation itself, which can be computationally challenging
+- However, mutation detection is a large area in genomics, so for now, we are just returning whether a mutation exists or not
+
+### Merge Conflict
+- We initially ran into a merge conflict as well and were able to resolve it using the git pull requeset tool
 
 # Run Commands
 
