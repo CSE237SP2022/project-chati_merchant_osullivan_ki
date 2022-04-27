@@ -128,8 +128,13 @@ public class DNAstrand {
 
 	}
 	public String substringFrequency(String DNAsequence){
-		
-
+		String result;
+		int index = 0;
+		int substringSize = 2;
+		for(int x = 0; x < DNAsequence.length(); x++){
+			
+		}
+		return result;
 	}
 	
 }
