@@ -32,11 +32,11 @@ public class mutationalAnalysis {
     	 
     }
     
-    public List<Map.Entry<Integer, ArrayList<Character>>> detectionPointInsertion(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
+    public boolean detectionPointInsertion(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
     	
     	String refDNASequence = dnaSequencesArray.get(0);
     	String mutDNASequence = dnaSequencesArray.get(1);
-    	
+    	    	
         List<Map.Entry<Integer, ArrayList<Character>>> mutationsArray = new ArrayList<>();
     	
         if (mutDNASequence.length() > refDNASequence.length()) {
@@ -53,17 +53,18 @@ public class mutationalAnalysis {
             			insertedNucleotides.add(mutNucleotide);
             			Map.Entry<Integer, ArrayList<Character>> mutationPositions = new AbstractMap.SimpleEntry<>(seqIndex, insertedNucleotides);
             			mutationsArray.add(mutationPositions);
+            			return true;
         			}
         			
         		}
         	}
         }
         
-    	return mutationsArray;
+    	return false;
     	
     }
     
-    public List<Map.Entry<Integer, Character>> detectionPointDeletion(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
+    public boolean detectionPointDeletion(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
     	
     	String refDNASequence = dnaSequencesArray.get(0);
     	String mutDNASequence = dnaSequencesArray.get(1);
@@ -83,13 +84,14 @@ public class mutationalAnalysis {
         				Character deletedNucleotide = refNucleotide;
             			Map.Entry<Integer, Character> mutationPositions = new AbstractMap.SimpleEntry<>(seqIndex, deletedNucleotide);
             			mutationsArray.add(mutationPositions);
+            			return true;
         			}        			
         			
         		}
         	}
         }
         
-    	return mutationsArray;
+    	return false;
     	
     }
 
