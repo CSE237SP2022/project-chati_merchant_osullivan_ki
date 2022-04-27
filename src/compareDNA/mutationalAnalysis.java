@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class mutationalAnalysis {
 
-    public List<Map.Entry<Integer, ArrayList<Character>>> detectSubstitution(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
+    public boolean detectSubstitution(ArrayList<String> dnaSequencesArray) throws FileNotFoundException {
     	
     	String refDNASequence = dnaSequencesArray.get(0);
     	String mutDNASequence = dnaSequencesArray.get(1);
@@ -24,11 +24,11 @@ public class mutationalAnalysis {
     			substitutionArray.add(refNucleotide);
     			substitutionArray.add(mutNucleotide);
     			Map.Entry<Integer, ArrayList<Character>> mutationPositions = new AbstractMap.SimpleEntry<>(seqIndex, substitutionArray);
-    			mutationsArray.add(mutationPositions);
+    			return true;
     		}
     	}
     	
-    	return mutationsArray;
+    	return false;
     	 
     }
     

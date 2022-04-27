@@ -18,6 +18,7 @@ import compareDNA.DNAstrand;
 import compareDNA.transcription;
 import compareDNA.validateTranscriptionOutputs;
 import compareDNA.translation;
+import compareDNA.pairwiseComparison;
 
 //citations
 //create mappings from input to output: https://www.baeldung.com/java-map-entry
@@ -39,6 +40,13 @@ public class runCompareDNA {
 		dnaInputValidation.runDNAstrand(dnaSequencesArray);
 		System.out.println("\n");
 		
+		//find longest subsequence
+		DNAstrand findKMer = new DNAstrand();
+		String longestKMerDNASeq1 = findKMer.substringFrequency(dnaSequencesArray.get(0));
+		System.out.println("\n");
+		String longestKMerDNASeq2 = findKMer.substringFrequency(dnaSequencesArray.get(0));
+		System.out.println("\n");
+		
 		//conduct transcription
 		transcription transcriptionModule = new transcription();
 		ArrayList<String> mRNASequencesArray = transcriptionModule.conductTranscription(dnaSequencesArray);
@@ -53,6 +61,12 @@ public class runCompareDNA {
 		translation translationModule = new translation();
 		String aminoAcidDictionaryPath = "compareDNA/aminoAcidsDictionary.txt";
 		ArrayList<String> aminoAcidSequencesArray = translationModule.translater(mRNASequencesArray, isRNAValid, aminoAcidDictionaryPath);
+		System.out.println("\n");
+		
+		//run similarity checker between amino acids
+		pairwiseComparison aminoAcidSimilarityScore = new pairwiseComparison();
+		aminoAcidSimilarityScore.similarityChecker(aminoAcidSequencesArray);
+		System.out.println("\n");
 
 	}
 	
