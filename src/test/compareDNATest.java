@@ -188,9 +188,13 @@ public class compareDNATest {
 
 		//Create a smaller strand from the larger strand
 		String subString = "CGACGAC";
+		
+		//create instance of method
+		shortDNASequence findDNASubstring = new shortDNASequence();
+		
 
 		//Check that the method found the location in the correct spot.
-		assertTrue("The location of the substring was not found", locationDNA(DNASequenceTest, subString).equals(2));
+		assertTrue("The location of the substring was not found", shortDNASequence.locationDNA(DNASequenceTest, subString) == 2);
 	}
 
 
