@@ -147,12 +147,12 @@ public class DNAstrand {
 					}
 				}
 				if(count >= highestCount && currString.length() > result.length()) {
+
 					result = currString;
 					highestCount = count;
 				}
 			}
 			substringLen++;
-			
 		}
 		
 		System.out.printf("The Longest Repeating Subsequence is %s", result);
