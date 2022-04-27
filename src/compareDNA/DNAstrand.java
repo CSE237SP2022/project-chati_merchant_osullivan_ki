@@ -139,6 +139,7 @@ public class DNAstrand {
 			for(int x = 0; x < DNAsequence.length() - substringLen; x++){
 				int count = 0;
 				for(int y = 1; y < DNAsequence.length(); y++) {
+
 					if(x + substringLen < DNAsequence.length() && y + substringLen < DNAsequence.length() ) {
 						currString = DNAsequence.substring(x, x+substringLen);
 						if(currString.equals(DNAsequence.substring(y, y+substringLen))) {
@@ -147,12 +148,12 @@ public class DNAstrand {
 					}
 				}
 				if(count >= highestCount && currString.length() > result.length()) {
+
 					result = currString;
 					highestCount = count;
 				}
 			}
 			substringLen++;
-			
 		}
 		
 		System.out.printf("The Longest Repeating Subsequence is %s", result);
