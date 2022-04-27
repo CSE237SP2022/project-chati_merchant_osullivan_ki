@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.TestFactory;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -194,6 +196,19 @@ public class compareDNATest {
 		assertTrue("The mRNA sequences were not properly translated to amino acids.", samplePeptideSequencesArray.equals(aminoAcidSequences));
 
 	} 
+	@Test
+	public void testsubstringFrequency() throws Exception{
+		//Setup DNA sequence with longest common substring of ATCG
+		String DNAsequence = "ATCGTGACATCGGACCATCG";
+		
+		//create a DNAstrand class and run the method
+		DNAstrand ds = new DNAstrand();
+		String result = ds.substringFrequency(DNAsequence);
+		
+		//check that the longest common substring was found
+		assertTrue("The most common substring was not ATCG", result.equals("ATCG"));
+		
+	}
 
 	@Test 
 	public void testShortDNASequence() throws Exception {
@@ -246,6 +261,5 @@ public class compareDNATest {
 		double testSimilarityPercent  = pariwiseAA.similarityChecker(similarAminoAcidsOne,similarAminoAcidsTwo);
 		assertTrue("The similarity percentages are not equal, please check the method.", testSimilarityPercent == similarityPercent);
 	}
-
 
 }
